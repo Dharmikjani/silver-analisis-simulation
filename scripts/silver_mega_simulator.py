@@ -1,6 +1,6 @@
 import sys
 import os
-sys.path.insert(0, os.path.abspath('src'))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
 import argparse
 import csv
@@ -9,6 +9,9 @@ from collections import defaultdict
 from config import SimConfig, HISTORICAL_1990_STATE, FUTURE_2026_STATE, SCENARIOS_OVERRIDE
 from logger import log_event
 from engine import run_simulation_core
+
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+OUTPUT_DIR = os.path.join(ROOT_DIR, 'outputs')
 
 def get_simulation_data():
     daily_data, _ = run_simulation_core()
@@ -19,7 +22,7 @@ def run_ultimate_simulation(iterations=100, years=10, suffix="base"):
         print("Iterations must be at least 1.")
         return
 
-    os.makedirs("outputs", exist_ok=True)
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
     results = {
         "squeeze_count": 0, "bank_run_count": 0, "short_squeeze_count": 0,
         "force_majeure_count": 0, "dpa_trigger_count": 0, "india_duty_trigger_count": 0,
@@ -65,7 +68,7 @@ def run_ultimate_simulation(iterations=100, years=10, suffix="base"):
         if "max_vault_float" in stats: results["max_vault_floats"].append(stats["max_vault_float"])
         
     # Write average path to CSV
-    with open(f"outputs/ultimate_simulation_path_{suffix}.csv", "w", newline="", encoding="utf-8") as f:
+    with open(os.path.join(OUTPUT_DIR, f"ultimate_simulation_path_{suffix}.csv"), "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["DayIndex", "Year", "Month", "Day", "Avg_Physical_Price", "Avg_Paper_Price", "Supply", "Demand", "Vault_Float"])
         for d_idx in sorted(aggregated_daily.keys()):
@@ -92,7 +95,7 @@ def run_ultimate_simulation(iterations=100, years=10, suffix="base"):
     serializable_stats["avg_end"] = sum(results['end_prices'])/len(results['end_prices'])
     serializable_stats["max_end"] = max(results['end_prices'])
     serializable_stats["min_end"] = min(results['end_prices'])
-    with open(f"outputs/simulation_stats_{suffix}.json", "w", encoding="utf-8") as sf:
+    with open(os.path.join(OUTPUT_DIR, f"simulation_stats_{suffix}.json"), "w", encoding="utf-8") as sf:
         json_module.dump(serializable_stats, sf, indent=4)
             
     print("="*75)

@@ -1,3 +1,7 @@
 pytest
 hypothesis
 yfinance
+
+fastapi
+uvicorn
+pyyaml

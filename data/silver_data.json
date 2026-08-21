@@ -1,0 +1,311 @@
+{
+  "market_overview": {
+    "symbol": "Ag",
+    "atomic_number": 47,
+    "atomic_mass": 107.868,
+    "electrical_conductivity_MS_m": 63.0,
+    "thermal_conductivity_W_mK": 429.0,
+    "current_status": "6th Consecutive Year of Structural Deficit",
+    "cumulative_deficit_2021_2026_moz": 762.5
+  },
+  "vault_and_free_float_history": [
+    { "year": 2019, "total_supply": 1017.5, "total_demand": 991.4, "market_balance": 26.1, "above_ground_stocks": 1481.0, "free_float": 790.0 },
+    { "year": 2020, "total_supply": 965.7, "total_demand": 907.0, "market_balance": 58.7, "above_ground_stocks": 1457.0, "free_float": 830.0 },
+    { "year": 2021, "total_supply": 1002.4, "total_demand": 1067.0, "market_balance": -64.6, "above_ground_stocks": 1392.0, "free_float": 760.0 },
+    { "year": 2022, "total_supply": 1003.0, "total_demand": 1243.4, "market_balance": -240.4, "above_ground_stocks": 1235.6, "free_float": 610.0 },
+    { "year": 2023, "total_supply": 1009.1, "total_demand": 1195.0, "market_balance": -185.9, "above_ground_stocks": 1198.5, "free_float": 510.0 },
+    { "year": 2024, "total_supply": 1013.6, "total_demand": 1162.5, "market_balance": -148.9, "above_ground_stocks": 1140.2, "free_float": 450.0 },
+    { "year": 2025, "total_supply": 1044.2, "total_demand": 1130.0, "market_balance": -40.3, "above_ground_stocks": 1099.9, "free_float": 420.0 },
+    { "year": 2026, "total_supply": 1046.5, "total_demand": 1284.3, "market_balance": -237.8, "above_ground_stocks": 1235.6, "free_float": 402.5 },
+    { "year": 2027, "total_supply": 1045.0, "total_demand": 1325.0, "market_balance": -80.0, "above_ground_stocks": 1013.5, "free_float": 320.0 },
+    { "year": 2028, "total_supply": 1052.0, "total_demand": 1368.0, "market_balance": -116.0, "above_ground_stocks": 897.5, "free_float": 204.0 },
+    { "year": 2029, "total_supply": 1060.0, "total_demand": 1410.0, "market_balance": -150.0, "above_ground_stocks": 747.5, "free_float": 95.0 },
+    { "year": 2030, "total_supply": 1070.0, "total_demand": 1455.0, "market_balance": -185.0, "above_ground_stocks": 562.5, "free_float": 15.0 }
+  ],
+  "historical_supply_demand": [
+    { "year": 2020, "mine_supply": 784.4, "recycling": 182.1, "net_hedging": -8.5, "total_supply": 958.0, "industrial": 489.2, "photography": 27.6, "jewelry": 149.6, "silverware": 32.1, "physical_investment": 208.5, "total_demand": 907.0, "market_balance": 51.0, "avg_price": 20.55 },
+    { "year": 2021, "mine_supply": 822.6, "recycling": 174.8, "net_hedging": 0.0, "total_supply": 997.4, "industrial": 539.8, "photography": 28.7, "jewelry": 181.4, "silverware": 42.5, "physical_investment": 274.6, "total_demand": 1067.0, "market_balance": -69.6, "avg_price": 25.14 },
+    { "year": 2022, "mine_supply": 822.4, "recycling": 180.6, "net_hedging": -17.9, "total_supply": 985.1, "industrial": 556.5, "photography": 28.5, "jewelry": 234.1, "silverware": 73.5, "physical_investment": 332.9, "total_demand": 1225.5, "market_balance": -240.4, "avg_price": 21.73 },
+    { "year": 2023, "mine_supply": 830.5, "recycling": 178.6, "net_hedging": 6.8, "total_supply": 1015.9, "industrial": 654.4, "photography": 26.1, "jewelry": 203.1, "silverware": 55.2, "physical_investment": 247.0, "total_demand": 1185.8, "market_balance": -169.9, "avg_price": 23.35 },
+    { "year": 2024, "mine_supply": 837.0, "recycling": 184.0, "net_hedging": 3.0, "total_supply": 1024.0, "industrial": 689.0, "photography": 25.0, "jewelry": 211.0, "silverware": 58.0, "physical_investment": 212.0, "total_demand": 1195.0, "market_balance": -171.0, "avg_price": 28.27 },
+    { "year": 2025, "mine_supply": 842.0, "recycling": 189.0, "net_hedging": 0.0, "total_supply": 1031.0, "industrial": 712.0, "photography": 24.0, "jewelry": 205.0, "silverware": 55.0, "physical_investment": 240.0, "total_demand": 1236.0, "market_balance": -40.3, "avg_price": 31.50 },
+    { "year": 2026, "mine_supply": 845.0, "recycling": 193.0, "net_hedging": 0.0, "total_supply": 1038.0, "industrial": 735.0, "photography": 23.0, "jewelry": 208.0, "silverware": 56.0, "physical_investment": 262.0, "total_demand": 1284.3, "market_balance": -46.3, "avg_price": 58.00 }
+  ],
+  "solar_pv_technology_breakdown": {
+    "technologies": [
+      { "name": "PERC (P-type)", "market_share_2026": "12%", "silver_loading_mg_wp": 10.5, "efficiency": "23.2%" },
+      { "name": "TOPCon (N-type)", "market_share_2026": "78%", "silver_loading_mg_wp": 13.8, "efficiency": "25.4%" },
+      { "name": "HJT (Heterojunction)", "market_share_2026": "8.5%", "silver_loading_mg_wp": 21.5, "efficiency": "26.1%" },
+      { "name": "Perovskite-Silicon Tandem", "market_share_2026": "1.5%", "silver_loading_mg_wp": 18.0, "efficiency": "35.5% (Lab Record)" }
+    ],
+    "paste_suppliers_market_share": [
+      { "supplier": "DKEM (Zhejiang Dajia)", "share": "38%", "focus": "TOPCon & Low-Temp Tandem Pastes" },
+      { "supplier": "Heraeus Photovoltaics", "share": "28%", "focus": "Low-Temp Silver Pastes & AgNW" },
+      { "supplier": "Fusion / Solamet (DuPont)", "share": "22%", "focus": "High-Efficiency Screen Print Pastes" }
+    ],
+    "pv_silver_demand_forecast_moz": [
+      { "year": 2025, "capacity_gw": 520, "pv_demand_moz": 185.0 },
+      { "year": 2026, "capacity_gw": 580, "pv_demand_moz": 198.5 },
+      { "year": 2027, "capacity_gw": 660, "pv_demand_moz": 222.0 },
+      { "year": 2028, "capacity_gw": 750, "pv_demand_moz": 248.0 },
+      { "year": 2029, "capacity_gw": 850, "pv_demand_moz": 272.0 },
+      { "year": 2030, "capacity_gw": 950, "pv_demand_moz": 295.0 }
+    ]
+  },
+  "substitution_matrix": [
+    {
+      "metal": "Copper (Cu)",
+      "target_applications": ["Solar PV Busbars", "Power Transmission", "Electrical Wiring", "Automotive Switches"],
+      "cost_advantage": "Copper is ~99% cheaper per kg",
+      "technical_barrier": "Rapid oxidation, silver migration, 6% lower electrical conductivity, higher annealing temperature",
+      "tipping_point_silver_price_usd": 45.0,
+      "feasibility_score": "7/10"
+    },
+    {
+      "metal": "Aluminum (Al)",
+      "target_applications": ["High Voltage Utility Grid", "Busbars", "Heavy Heat Sinks"],
+      "cost_advantage": "Aluminum is ~99.5% cheaper per kg and 70% lighter",
+      "technical_barrier": "61% electrical conductivity vs Ag, galvanic corrosion, brittle intermetallic compounds",
+      "tipping_point_silver_price_usd": 35.0,
+      "feasibility_score": "5/10"
+    },
+    {
+      "metal": "Carbon Nanotubes / Graphene",
+      "target_applications": ["Flexible Touchscreens", "Transparent Conductive Films", "Wearables"],
+      "cost_advantage": "High scalability potential in thin-film coating",
+      "technical_barrier": "High contact resistance, synthesis uniformity issues, low ampacity compared to bulk silver",
+      "tipping_point_silver_price_usd": 60.0,
+      "feasibility_score": "4/10"
+    }
+  ],
+  "mine_supply_byproduct_ratio": {
+    "primary_silver_mines_percent": 26.0,
+    "lead_zinc_byproduct_percent": 30.0,
+    "copper_byproduct_percent": 27.0,
+    "gold_byproduct_percent": 16.0,
+    "other_byproduct_percent": 1.0
+  },
+  "top_producing_countries": [
+    { "country": "Mexico", "annual_output_moz": 198.5, "share_percent": 23.5 },
+    { "country": "China", "annual_output_moz": 110.2, "share_percent": 13.0 },
+    { "country": "Peru", "annual_output_moz": 105.8, "share_percent": 12.5 },
+    { "country": "Poland", "annual_output_moz": 42.1, "share_percent": 5.0 },
+    { "country": "Chile", "annual_output_moz": 40.5, "share_percent": 4.8 },
+    { "country": "Bolivia", "annual_output_moz": 38.2, "share_percent": 4.5 },
+    { "country": "Russia", "annual_output_moz": 37.0, "share_percent": 4.4 }
+  ],
+  "scenarios_2025_2035": {
+    "Base_Case": {
+      "title": "Moderate Energy Transition & Gradual Thrifting",
+      "solar_growth_annual_pct": 12.0,
+      "thrifting_rate_annual_pct": -3.5,
+      "avg_annual_deficit_moz": -85.0,
+      "price_target_2028": 72.00,
+      "price_target_2030": 85.00,
+      "price_target_2035": 115.00
+    },
+    "Bull_Case": {
+      "title": "Accelerated Energy Transition, AI Surge & Supply Bottleneck",
+      "solar_growth_annual_pct": 22.0,
+      "thrifting_rate_annual_pct": -1.5,
+      "avg_annual_deficit_moz": -185.0,
+      "price_target_2028": 95.00,
+      "price_target_2030": 125.00,
+      "price_target_2035": 185.00
+    },
+    "Bear_Case": {
+      "title": "Rapid Copper Substitution & Macro Industrial Slowdown",
+      "solar_growth_annual_pct": 5.0,
+      "thrifting_rate_annual_pct": -8.0,
+      "avg_annual_deficit_moz": 15.0,
+      "price_target_2028": 45.00,
+      "price_target_2030": 42.00,
+      "price_target_2035": 48.00
+    },
+    "Supply_Crunch_Case": {
+      "title": "Latin American Mining Disruptions & Ore Grade Decay",
+      "solar_growth_annual_pct": 14.0,
+      "thrifting_rate_annual_pct": -2.0,
+      "avg_annual_deficit_moz": -220.0,
+      "price_target_2028": 110.00,
+      "price_target_2030": 150.00,
+      "price_target_2035": 220.00
+    }
+  },
+  "mining_company_audit": [
+    { "rank": 1, "company": "Fresnillo plc", "ticker": "FRES", "jurisdiction": "Mexico", "annual_output_moz": 44.0, "aisc_usd_oz": 22.20, "reserves_moz": 362.6, "reserve_life_yrs": 9, "risk_rating": "Med-High" },
+    { "rank": 2, "company": "KGHM Polska", "ticker": "KGH", "jurisdiction": "Poland (EU)", "annual_output_moz": 41.5, "aisc_usd_oz": 6.50, "reserves_moz": 1200.0, "reserve_life_yrs": 25, "risk_rating": "Low" },
+    { "rank": 3, "company": "Newmont Corp", "ticker": "NEM", "jurisdiction": "USA / Mexico", "annual_output_moz": 31.0, "aisc_usd_oz": 12.80, "reserves_moz": 420.0, "reserve_life_yrs": 15, "risk_rating": "Low-Med" },
+    { "rank": 4, "company": "Glencore plc", "ticker": "GLEN", "jurisdiction": "Switz / Americas", "annual_output_moz": 29.5, "aisc_usd_oz": 11.50, "reserves_moz": 510.0, "reserve_life_yrs": 18, "risk_rating": "Medium" },
+    { "rank": 5, "company": "Pan American Ag", "ticker": "PAAS", "jurisdiction": "Americas", "annual_output_moz": 26.0, "aisc_usd_oz": 15.75, "reserves_moz": 452.0, "reserve_life_yrs": 16, "risk_rating": "Medium" },
+    { "rank": 6, "company": "Polymetal / Solidus", "ticker": "POLY", "jurisdiction": "Kazakh / Russia", "annual_output_moz": 21.0, "aisc_usd_oz": 16.50, "reserves_moz": 210.0, "reserve_life_yrs": 11, "risk_rating": "High" },
+    { "rank": 7, "company": "Southern Copper", "ticker": "SCCO", "jurisdiction": "Mex / Peru", "annual_output_moz": 19.0, "aisc_usd_oz": 8.20, "reserves_moz": 680.0, "reserve_life_yrs": 30, "risk_rating": "Med-High" },
+    { "rank": 8, "company": "Hindustan Zinc", "ticker": "HZNC", "jurisdiction": "India (Rajasthan)", "annual_output_moz": 18.5, "aisc_usd_oz": 9.80, "reserves_moz": 295.0, "reserve_life_yrs": 15, "risk_rating": "Low-Med" },
+    { "rank": 9, "company": "Hecla Mining", "ticker": "HL", "jurisdiction": "USA / Canada", "annual_output_moz": 17.0, "aisc_usd_oz": 11.28, "reserves_moz": 231.0, "reserve_life_yrs": 14, "risk_rating": "Low" },
+    { "rank": 10, "company": "First Majestic", "ticker": "AG", "jurisdiction": "Mexico", "annual_output_moz": 14.0, "aisc_usd_oz": 25.68, "reserves_moz": 185.0, "reserve_life_yrs": 8, "risk_rating": "High" }
+  ],
+  "gold_silver_ratio": {
+    "historical_all_time_high": 124.0,
+    "historical_all_time_low": 15.0,
+    "historical_50yr_average": 65.0,
+    "current_ratio_2026": 55.0,
+    "target_ratio_in_bull_cycle": 30.0
+  },
+  "institutional_cot_and_etf_tracker": {
+    "cot_positioning_2026": [
+      { "category": "Commercial Swap Dealers", "net_contracts": -88300, "equivalent_moz": -441.5, "type": "Net Short" },
+      { "category": "Producer / Merchant", "net_contracts": -24400, "equivalent_moz": -122.0, "type": "Net Short" },
+      { "category": "Managed Money (Hedge Funds)", "net_contracts": 79800, "equivalent_moz": 399.0, "type": "Net Long" },
+      { "category": "Other Reportables", "net_contracts": 14700, "equivalent_moz": 73.5, "type": "Net Long" },
+      { "category": "Non-Reportable (Retail)", "net_contracts": 18200, "equivalent_moz": 91.0, "type": "Net Long" }
+    ],
+    "paper_leverage_ratios": {
+      "comex_open_interest_moz": 1000.0,
+      "comex_total_vault_moz": 332.8,
+      "comex_registered_deliverable_moz": 99.7,
+      "paper_to_registered_ratio": 10.03,
+      "swap_dealer_short_to_registered_ratio": 4.43
+    },
+    "top_etf_holdings_moz": [
+      { "ticker": "SLV", "name": "iShares Silver Trust", "sponsor": "BlackRock", "custodian": "JPMorgan Chase (London)", "holdings_moz": 455.2, "share_pct": 53.9 },
+      { "ticker": "PSLV", "name": "Sprott Physical Silver Trust", "sponsor": "Sprott Asset Mgmt", "custodian": "Royal Canadian Mint (Ottawa)", "holdings_moz": 178.5, "share_pct": 21.1 },
+      { "ticker": "PHAG", "name": "WisdomTree Physical Silver", "sponsor": "WisdomTree", "custodian": "HSBC Bank (London)", "holdings_moz": 88.4, "share_pct": 10.5 },
+      { "ticker": "ZKB", "name": "ZKB Silver ETF", "sponsor": "Zürcher Kantonalbank", "custodian": "ZKB Vaults (Zurich)", "holdings_moz": 78.0, "share_pct": 9.2 },
+      { "ticker": "SIVR", "name": "abrdn Physical Silver Standard", "sponsor": "Aberdeen Standard", "custodian": "JPMorgan (London)", "holdings_moz": 44.5, "share_pct": 5.3 }
+    ],
+    "etf_quarterly_flows": [
+      { "quarter": "2024 Q1", "net_flow_moz": -6.2, "cumulative_year_moz": -6.2, "avg_price": 23.10 },
+      { "quarter": "2024 Q2", "net_flow_moz": 8.4, "cumulative_year_moz": 2.2, "avg_price": 27.80 },
+      { "quarter": "2024 Q3", "net_flow_moz": 5.1, "cumulative_year_moz": 7.3, "avg_price": 29.20 },
+      { "quarter": "2024 Q4", "net_flow_moz": 11.2, "cumulative_year_moz": 18.5, "avg_price": 31.50 },
+      { "quarter": "2025 Q1", "net_flow_moz": 14.5, "cumulative_year_moz": 14.5, "avg_price": 32.40 },
+      { "quarter": "2025 Q2", "net_flow_moz": 9.8, "cumulative_year_moz": 24.3, "avg_price": 34.10 },
+      { "quarter": "2025 Q3", "net_flow_moz": 10.2, "cumulative_year_moz": 34.5, "avg_price": 36.80 },
+      { "quarter": "2025 Q4", "net_flow_moz": 7.5, "cumulative_year_moz": 42.0, "avg_price": 39.50 },
+      { "quarter": "2026 Q1", "net_flow_moz": 28.5, "cumulative_year_moz": 28.5, "avg_price": 48.20 },
+      { "quarter": "2026 Q2", "net_flow_moz": 30.0, "cumulative_year_moz": 58.5, "avg_price": 58.00 }
+    ]
+  },
+  "regional_arbitrage_and_premiums": {
+    "exchange_premiums_2026": [
+      { "hub": "LBMA London", "equivalent_usd_oz": 58.00, "premium_usd_oz": 0.00, "premium_pct": 0.0, "type": "Physical OTC Wholesale" },
+      { "hub": "COMEX New York", "equivalent_usd_oz": 58.25, "premium_usd_oz": 0.25, "premium_pct": 0.4, "type": "Paper Futures" },
+      { "hub": "Shanghai SGE (Ag T+D)", "equivalent_usd_oz": 63.80, "premium_usd_oz": 5.80, "premium_pct": 10.0, "type": "Physical Spot & Delivery" },
+      { "hub": "India MCX (Mumbai)", "equivalent_usd_oz": 64.90, "premium_usd_oz": 6.90, "premium_pct": 11.9, "type": "Domestic Import & Physical" }
+    ],
+    "retail_mint_premiums": [
+      { "product": "US Silver Eagle (1 oz)", "mint": "US Mint", "retail_price_usd": 72.50, "premium_usd": 14.50, "premium_pct": 25.0 },
+      { "product": "Silver Maple Leaf (1 oz)", "mint": "Royal Canadian Mint", "retail_price_usd": 66.20, "premium_usd": 8.20, "premium_pct": 14.1 },
+      { "product": "Britannia (1 oz)", "mint": "Royal Mint (UK)", "retail_price_usd": 65.50, "premium_usd": 7.50, "premium_pct": 13.0 },
+      { "product": "100 oz Commercial Silver Bar", "mint": "Valcambi / PAMP", "retail_price_usd": 61.20, "premium_usd": 3.20, "premium_pct": 5.5 },
+      { "product": "1 kg (32.15 oz) Cast Bar", "mint": "Heraeus / Umicore", "retail_price_usd": 60.80, "premium_usd": 2.80, "premium_pct": 4.8 }
+    ],
+    "india_annual_imports": [
+      { "year": 2021, "import_tonnes": 4500, "equivalent_moz": 144.7, "tariff_duty_pct": 12.5 },
+      { "year": 2022, "import_tonnes": 9450, "equivalent_moz": 303.8, "tariff_duty_pct": 12.5 },
+      { "year": 2023, "import_tonnes": 3620, "equivalent_moz": 116.4, "tariff_duty_pct": 15.0 },
+      { "year": 2024, "import_tonnes": 10500, "equivalent_moz": 337.6, "tariff_duty_pct": 6.0 },
+      { "year": 2025, "import_tonnes": 9200, "equivalent_moz": 295.8, "tariff_duty_pct": 6.0 },
+      { "year": 2026, "import_tonnes": 9800, "equivalent_moz": 315.1, "tariff_duty_pct": 6.0 }
+    ]
+  },
+  "geopolitical_and_tariff_risk_matrix": {
+    "country_risk_matrix": [
+      { "country": "Mexico", "output_moz": 198.5, "world_share_pct": 23.5, "risk_score": 7.5, "risk_level": "High", "primary_threat": "Open-pit mining ban & water concession limits" },
+      { "country": "China", "output_moz": 110.2, "world_share_pct": 13.0, "risk_score": 6.0, "risk_level": "Medium", "primary_threat": "Strategic export restrictions & state quota controls" },
+      { "country": "Peru", "output_moz": 105.8, "world_share_pct": 12.5, "risk_score": 7.0, "risk_level": "High", "primary_threat": "Political instability & mining corridor blockades" },
+      { "country": "Poland", "output_moz": 42.1, "world_share_pct": 5.0, "risk_score": 2.0, "risk_level": "Low", "primary_threat": "EU carbon tax & environmental compliance cost" },
+      { "country": "Chile", "output_moz": 40.5, "world_share_pct": 4.8, "risk_score": 4.5, "risk_level": "Medium", "primary_threat": "Mining royalty tax hikes & water rights reforms" },
+      { "country": "Bolivia", "output_moz": 38.2, "world_share_pct": 4.5, "risk_score": 8.5, "risk_level": "High", "primary_threat": "Currency shortage & state mining intervention" },
+      { "country": "Russia", "output_moz": 37.0, "world_share_pct": 4.4, "risk_score": 9.0, "risk_level": "Severe", "primary_threat": "LBMA deliverable ban & Western financial sanctions" }
+    ],
+    "policy_disruption_impacts": [
+      { "catalyst": "Mexican Open-Pit Mine Restrictions", "jurisdiction": "Mexico", "annual_supply_drag_moz": -30.0, "probability": "High" },
+      { "catalyst": "Peruvian Highway Corridor Blockades", "jurisdiction": "Peru", "annual_supply_drag_moz": -18.0, "probability": "Medium-High" },
+      { "catalyst": "Russian Metal Export Sanctions", "jurisdiction": "Russia / West", "annual_supply_drag_moz": -12.0, "probability": "Active" },
+      { "catalyst": "Bolivian State Mining Quotas", "jurisdiction": "Bolivia", "annual_supply_drag_moz": -8.0, "probability": "Medium" }
+    ],
+    "critical_mineral_status": [
+      { "jurisdiction": "United States (DOE)", "status": "Critical Material (2026)", "ira_tax_credit_eligible": true },
+      { "jurisdiction": "United States (USGS)", "status": "Under Formal Review", "ira_tax_credit_eligible": true },
+      { "jurisdiction": "European Union (CRMA)", "status": "Strategic Raw Material", "ira_tax_credit_eligible": false },
+      { "jurisdiction": "Canada (NRCan)", "status": "Critical Mineral", "ira_tax_credit_eligible": true }
+    ]
+  },
+  "recycling_and_ewaste_recovery": {
+    "historical_scrap_breakdown": [
+      { "year": 2020, "total_recycling_moz": 182.1, "industrial_eo_catalyst_moz": 98.5, "jewelry_silverware_moz": 51.2, "photo_recovery_moz": 21.0, "urban_ewaste_moz": 11.4 },
+      { "year": 2021, "total_recycling_moz": 174.8, "industrial_eo_catalyst_moz": 92.4, "jewelry_silverware_moz": 49.5, "photo_recovery_moz": 20.8, "urban_ewaste_moz": 12.1 },
+      { "year": 2022, "total_recycling_moz": 180.6, "industrial_eo_catalyst_moz": 95.8, "jewelry_silverware_moz": 51.0, "photo_recovery_moz": 20.5, "urban_ewaste_moz": 13.3 },
+      { "year": 2023, "total_recycling_moz": 178.6, "industrial_eo_catalyst_moz": 94.2, "jewelry_silverware_moz": 50.1, "photo_recovery_moz": 20.3, "urban_ewaste_moz": 14.0 },
+      { "year": 2024, "total_recycling_moz": 184.0, "industrial_eo_catalyst_moz": 97.5, "jewelry_silverware_moz": 51.8, "photo_recovery_moz": 20.1, "urban_ewaste_moz": 14.6 },
+      { "year": 2025, "total_recycling_moz": 189.0, "industrial_eo_catalyst_moz": 100.2, "jewelry_silverware_moz": 53.0, "photo_recovery_moz": 20.4, "urban_ewaste_moz": 15.4 },
+      { "year": 2026, "total_recycling_moz": 193.0, "industrial_eo_catalyst_moz": 102.5, "jewelry_silverware_moz": 54.0, "photo_recovery_moz": 20.5, "urban_ewaste_moz": 16.0 }
+    ],
+    "scrap_price_elasticity": [
+      { "spot_price_band_usd": 35.0, "projected_scrap_supply_moz": 185.0, "deficit_coverage_pct": 14.5, "status": "Sluggish Supply" },
+      { "spot_price_band_usd": 50.0, "projected_scrap_supply_moz": 193.0, "deficit_coverage_pct": 24.5, "status": "Baseline Elasticity" },
+      { "spot_price_band_usd": 65.0, "projected_scrap_supply_moz": 212.0, "deficit_coverage_pct": 32.0, "status": "Moderate Dishoarding" },
+      { "spot_price_band_usd": 85.0, "projected_scrap_supply_moz": 245.0, "deficit_coverage_pct": 42.0, "status": "Jewelry Dishoarding Surge" },
+      { "spot_price_band_usd": 100.0, "projected_scrap_supply_moz": 275.0, "deficit_coverage_pct": 55.0, "status": "Technical Scrap Ceiling" }
+    ],
+    "recycling_process_costs": [
+      { "process": "Pyrometallurgical Smelting", "recovery_rate_pct": 98.2, "cost_usd_oz": 18.20, "limitation": "High CAPEX & energy intensity" },
+      { "process": "Hydrometallurgical Leaching", "recovery_rate_pct": 94.5, "cost_usd_oz": 14.50, "limitation": "Eco-toxic chemical waste handling" },
+      { "process": "Bio-Leaching (Advanced)", "recovery_rate_pct": 88.0, "cost_usd_oz": 11.00, "limitation": "Slow leaching reaction kinetics" }
+    ]
+  },
+  "defense_aerospace_and_electronics": {
+    "defense_applications": [
+      { "application": "Guided Missile Thermal Batteries", "system": "Patriot / AMRAAM / Tomahawk", "silver_demand_moz_2026": 4.5, "price_elasticity": 0.0, "status": "100% Inelastic" },
+      { "application": "Satellite Solar Arrays (LEO)", "system": "Starlink / Kuiper / MilSat", "silver_demand_moz_2026": 7.5, "price_elasticity": 0.0, "status": "100% Inelastic" },
+      { "application": "Military Radar & RF Waveguides", "system": "AESA Radar / 5G Defense", "silver_demand_moz_2026": 3.8, "price_elasticity": 0.0, "status": "100% Inelastic" },
+      { "application": "Defense Optical & Laser Optics", "system": "Space Lidar & High-Power Optics", "silver_demand_moz_2026": 2.2, "price_elasticity": 0.0, "status": "100% Inelastic" }
+    ],
+    "satellite_constellation_forecast": [
+      { "year": 2024, "satellites_deployed": 3200, "ag_demand_moz": 4.2 },
+      { "year": 2025, "satellites_deployed": 4500, "ag_demand_moz": 5.8 },
+      { "year": 2026, "satellites_deployed": 5800, "ag_demand_moz": 7.5 },
+      { "year": 2028, "satellites_deployed": 8200, "ag_demand_moz": 10.8 },
+      { "year": 2030, "satellites_deployed": 11500, "ag_demand_moz": 15.0 }
+    ]
+  },
+  "ai_sentiment_and_macro_signals": {
+    "macro_regression_factors": [
+      { "factor": "US 10-Yr Real Yield (TIPS)", "baseline_value": "1.45%", "beta_coefficient": -4.20, "sensitivity": "-1.0% drop = +$12.60/oz" },
+      { "factor": "US Dollar Index (DXY)", "baseline_value": "101.5", "beta_coefficient": -1.80, "sensitivity": "-5.0% drop = +$5.20/oz" },
+      { "factor": "Global M2 Money Supply", "baseline_value": "$108.5 T", "beta_coefficient": 2.40, "sensitivity": "+8% growth = +$8.50/oz" },
+      { "factor": "Industrial Market Deficit", "baseline_value": "-46.3 Moz", "beta_coefficient": 3.10, "sensitivity": "+50 Moz deficit = +$15.50/oz" }
+    ],
+    "squeeze_probability_index": [
+      { "year": 2024, "squeeze_score_pct": 45.0, "risk_level": "Moderate Risk" },
+      { "year": 2025, "squeeze_score_pct": 68.0, "risk_level": "High Risk" },
+      { "year": 2026, "squeeze_score_pct": 88.5, "risk_level": "Critical Threshold" },
+      { "year": 2027, "squeeze_score_pct": 96.0, "risk_level": "Imminent Squeeze" },
+      { "year": 2028, "squeeze_score_pct": 99.5, "risk_level": "Physical Crunch" }
+    ],
+    "gsr_reversion_scenarios": [
+      { "gold_price_usd": 2800, "gsr_target": "35:1", "resulting_silver_usd": 80.00 },
+      { "gold_price_usd": 3000, "gsr_target": "35:1", "resulting_silver_usd": 85.70 },
+      { "gold_price_usd": 3500, "gsr_target": "30:1", "resulting_silver_usd": 116.60 },
+      { "gold_price_usd": 4000, "gsr_target": "25:1", "resulting_silver_usd": 160.00 }
+    ],
+    "ai_sentiment_scoring": {
+      "institutional_sentiment_score": 0.82,
+      "rating": "Extremely Bullish",
+      "cta_algorithmic_leverage": "Maximum Bullish Momentum"
+    }
+  },
+  "pure_physical_squeeze_model": {
+    "scarcity_exponent_alpha": 1.65,
+    "yearly_scarcity_trajectory": [
+      { "year": 2024, "free_float_moz": 450.0, "cumulative_deficit_moz": 0.0, "scarcity_multiplier": 1.00, "pure_squeeze_peak_usd": 37.50 },
+      { "year": 2025, "free_float_moz": 420.0, "cumulative_deficit_moz": -40.3, "scarcity_multiplier": 1.15, "pure_squeeze_peak_usd": 45.00 },
+      { "year": 2026, "free_float_moz": 402.5, "cumulative_deficit_moz": -86.6, "scarcity_multiplier": 1.29, "pure_squeeze_peak_usd": 75.00 },
+      { "year": 2027, "free_float_moz": 320.0, "cumulative_deficit_moz": -166.6, "scarcity_multiplier": 1.64, "pure_squeeze_peak_usd": 105.00 },
+      { "year": 2028, "free_float_moz": 204.0, "cumulative_deficit_moz": -281.6, "scarcity_multiplier": 2.15, "pure_squeeze_peak_usd": 155.00 },
+      { "year": 2029, "free_float_moz": 95.0, "cumulative_deficit_moz": -430.6, "scarcity_multiplier": 2.24, "pure_squeeze_peak_usd": 175.00 },
+      { "year": 2030, "free_float_moz": 15.0, "cumulative_deficit_moz": -615.6, "scarcity_multiplier": 2.41, "pure_squeeze_peak_usd": 225.00 }
+    ]
+  }
+}

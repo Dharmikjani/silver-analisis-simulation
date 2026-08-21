@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silver Research & Intelligence Dashboard (Ag 47)</title>
+    <meta name="description" content="Comprehensive research, technological breakdown, supply-demand forecasting, and multi-year price projection dashboard for Silver (Ag).">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo-area">
+                <div class="element-badge">Ag <span>47</span></div>
+                <div class="logo-text">
+                    <h1>Silver Intelligence Suite</h1>
+                    <p class="subtitle">Global Market Fundamentals, Tech Frontiers & 2025–2035 Forecasts</p>
+                </div>
+            </div>
+            <div class="header-metrics">
+                <div class="metric-pill">
+                    <span class="label">Current Status</span>
+                    <span class="value badge-danger">6-Yr Deficit</span>
+                </div>
+                <div class="metric-pill">
+                    <span class="label">6-Yr Drawdown</span>
+                    <span class="value highlight">762.5 Moz</span>
+                </div>
+                <div class="metric-pill">
+                    <span class="label">Byproduct Supply</span>
+                    <span class="value">74.0%</span>
+                </div>
+            </div>
+        </div>
+        <nav class="nav-tabs">
+            <button class="tab-btn active" data-tab="tab-overview">Executive Summary</button>
+            <button class="tab-btn" data-tab="tab-thesis">Bull &amp; Bear Thesis</button>
+            <button class="tab-btn" data-tab="tab-cot">Institutional &amp; ETF Tracker</button>
+            <button class="tab-btn" data-tab="tab-arbitrage">Regional Premiums</button>
+            <button class="tab-btn" data-tab="tab-geopolitics">Geopolitics &amp; Tariffs</button>
+            <button class="tab-btn" data-tab="tab-recycling">Recycling &amp; E-Waste</button>
+            <button class="tab-btn" data-tab="tab-defense">Defense &amp; Aerospace</button>
+            <button class="tab-btn" data-tab="tab-macro">AI &amp; Macro Signals</button>
+            <button class="tab-btn" data-tab="tab-puresqueeze">⚡ Pure Squeeze Engine</button>
+            <button class="tab-btn" data-tab="tab-tech">Tech &amp; Solar R&amp;D</button>
+            <button class="tab-btn" data-tab="tab-mining">Miners &amp; AISC Audit</button>
+            <button class="tab-btn" data-tab="tab-substitution">Substitution Matrix</button>
+            <button class="tab-btn" data-tab="tab-scenarios">Scenario Simulator</button>
+            <button class="tab-btn" data-tab="tab-price">Price Forecasts</button>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        
+        <!-- SECTION 1: EXECUTIVE SUMMARY / OVERVIEW -->
+        <section id="tab-overview" class="tab-content active">
+            <div class="hero-card">
+                <div class="hero-content">
+                    <h2>Silver Market Dynamics: Structural Tightness & Decarbonization</h2>
+                    <p>Silver occupies a unique dual-identity: an indispensable industrial metal powering solar PV, EVs, and AI datacenters, alongside its historical role as a monetary hedge. With 6 consecutive years of market deficits, global above-ground inventory is undergoing unprecedented depletion.</p>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-num">1,284.3 Moz</div>
+                        <div class="stat-desc">2026 Estimated Demand</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num">1,038.0 Moz</div>
+                        <div class="stat-desc">2026 Estimated Supply</div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-num">-46.3 Moz</div>
+                        <div class="stat-desc">2026 Net Market Balance</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2col">
+                <div class="card">
+                    <h3>Supply & Demand Balance (2019 - 2026)</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="chartSupplyDemand"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Mine Supply by Country & Byproduct Origin</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="chartMineByproduct"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-large">
+                <div class="card-header" style="justify-content: space-between; flex-wrap: wrap;">
+                    <div>
+                        <h3>Integrated Fundamentals &amp; Vault Free Float Chart (2019–2030)</h3>
+                        <p class="subtitle">Simultaneous tracking of Annual Supply, Annual Demand, Above-Ground Reserves, and Liquid Free Float Silver.</p>
+                    </div>
+                    <div class="header-metrics" style="gap: 0.5rem;">
+                        <span class="badge-success" style="background: rgba(56, 189, 248, 0.15); padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.8rem;">🔵 Supply</span>
+                        <span class="badge-success" style="background: rgba(192, 132, 252, 0.15); color: #c084fc; padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.8rem;">🟣 Demand</span>
+                        <span class="badge-success" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.8rem;">🟡 Reserves</span>
+                        <span class="badge-danger" style="background: rgba(248, 113, 113, 0.15); padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.8rem;">🔴 Free Float</span>
+                    </div>
+                </div>
+                <div class="chart-wrapper" style="height: 400px;">
+                    <canvas id="chartVaultAndFreeFloat"></canvas>
+                </div>
+            </div>
+
+            <!-- UNIFIED MULTI-YEAR PRICE FORECAST & PURE SQUEEZE PEAK CHART -->
+            <div class="card mb-large">
+                <div class="card-header" style="justify-content: space-between; flex-wrap: wrap;">
+                    <div>
+                        <h3>Multi-Year Price Forecast &amp; Pure Physical Squeeze Peak (2025–2035)</h3>
+                        <p class="subtitle">Comparing Base/Bull/Bear settlement averages against Pure Physical Vault Scarcity Squeeze Peaks ($/oz).</p>
+                    </div>
+                    <div class="header-metrics">
+                        <div class="metric-pill">
+                            <span class="label">2026 Baseline</span>
+                            <span id="overviewLiveSpot" class="value highlight">$58.00 / oz</span>
+                        </div>
+                        <div class="metric-pill">
+                            <span class="label">2028 Pure Squeeze Peak</span>
+                            <span class="value badge-danger">$155.00 / oz</span>
+                        </div>
+                        <div class="metric-pill">
+                            <span class="label">2030 Pure Squeeze Peak</span>
+                            <span class="value badge-danger">$225 – $250 / oz</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-wrapper" style="height: 420px;">
+                    <canvas id="chartPriceForecastOverview"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: BULL & BEAR THESIS -->
+        <section id="tab-thesis" class="tab-content">
+            <div class="grid-2col">
+                <div class="card card-bull">
+                    <div class="card-header">
+                        <span class="icon">🚀</span>
+                        <h3>Positive / Bullish Drivers</h3>
+                    </div>
+                    <ul class="feature-list">
+                        <li><strong>Electrical & Thermal Supremacy:</strong> Highest electrical ($63.0\times 10^6\text{ S/m}$) & thermal ($429\text{ W/mK}$) conductivity of all metals.</li>
+                        <li><strong>Inelastic Byproduct Supply:</strong> 74% mined as secondary byproduct of Cu/Pb/Zn/Au; price spikes do not automatically boost mining output.</li>
+                        <li><strong>Green Transition & AI Infrastructure:</strong> Massive growth in solar TOPCon/HJT cells, EV power electronics, and AI datacenter busbars.</li>
+                        <li><strong>Monetary Asset & GSR Reversion:</strong> Historical precedent shows Gold-to-Silver Ratio compresses from ~78:1 toward 40:1 during precious metals bull cycles.</li>
+                    </ul>
+                </div>
+                <div class="card card-bear">
+                    <div class="card-header">
+                        <span class="icon">⚠️</span>
+                        <h3>Negative / Bearish Risks</h3>
+                    </div>
+                    <ul class="feature-list">
+                        <li><strong>Thrifting & Substitution:</strong> Solar module manufacturers actively research fine-line printing, busbarless wire tech, and copper electroplating.</li>
+                        <li><strong>Volatility & Margin Hikes:</strong> High historical price beta; futures exchange margin hikes (e.g., COMEX) can cause rapid speculative liquidations.</li>
+                        <li><strong>Recycling Scrap Surges:</strong> Secondary scrap recycling expands rapidly above $40–$50/oz, adding secondary buffer supply.</li>
+                        <li><strong>High Storage Overhead:</strong> Lower value-to-density ratio compared to gold increases physical vaulting and transport costs.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: TECH & SOLAR R&D -->
+        <section id="tab-tech" class="tab-content">
+            <div class="card mb-large">
+                <div class="card-header">
+                    <div>
+                        <h3>Perovskite-Silicon Tandem Solar Cells &amp; Metallization Frontiers</h3>
+                        <p class="subtitle">LONGi (35.5% efficiency record) and Oxford PV commercialization roadmap driving next-gen industrial silver demand.</p>
+                    </div>
+                </div>
+
+                <div class="chart-wrapper">
+                    <canvas id="chartSolarTech"></canvas>
+                </div>
+            </div>
+
+                    <h4>🔋 Samsung Ag-C Battery</h4>
+                    <p class="card-text">Anode-free solid-state battery with 5-micron Silver-Carbon layer. >900 Wh/L energy density and 600+ mile EV range potential.</p>
+                </div>
+                <div class="card">
+                    <h4>🖥️ AI Server Connectors</h4>
+                    <p class="card-text">High-density silver-coated copper busbars and optical transceivers for 800G/1.6T networking in high-voltage AI datacenter racks.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3.5: MINERS & AISC COST AUDIT -->
+        <section id="tab-mining" class="tab-content">
+            <div class="card mb-large">
+                <h3>Global Silver Producers AISC Cost Curve ($ / oz)</h3>
+                <p class="subtitle">Comparing All-In Sustaining Costs (AISC), annual production volume, and reserve life across top primary and byproduct producers.</p>
+                <div class="chart-wrapper">
+                    <canvas id="chartMiningAISC"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Top Producer Microeconomic Audit</h3>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Company (Ticker)</th>
+                                <th>Primary Jurisdiction</th>
+                                <th>Annual Output (Moz)</th>
+                                <th>AISC ($/oz)</th>
+                                <th>Silver Reserves (Moz)</th>
+                                <th>Reserve Life (Yrs)</th>
+                                <th>Geopolitical Risk</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>#1 <strong>Fresnillo plc (FRES)</strong></td><td>Mexico</td><td>44.0 Moz</td><td>$22.20 / oz</td><td>362.6 Moz</td><td>9 Yrs</td><td>Med-High</td></tr>
+                            <tr><td>#2 <strong>KGHM Polska (KGH)</strong></td><td>Poland (EU)</td><td>41.5 Moz</td><td><span class="badge-success">$6.50 / oz (Byproduct)</span></td><td>1,200+ Moz (Cu)</td><td>25+ Yrs</td><td>Low</td></tr>
+                            <tr><td>#3 <strong>Newmont Corp (NEM)</strong></td><td>USA / Mexico</td><td>31.0 Moz</td><td>$12.80 / oz</td><td>420.0 Moz</td><td>15 Yrs</td><td>Low-Med</td></tr>
+                            <tr><td>#4 <strong>Glencore plc (GLEN)</strong></td><td>Switz / Americas</td><td>29.5 Moz</td><td>$11.50 / oz</td><td>510.0 Moz</td><td>18 Yrs</td><td>Medium</td></tr>
+                            <tr><td>#5 <strong>Pan American Ag (PAAS)</strong></td><td>Americas</td><td>26.0 Moz</td><td>$15.75 / oz</td><td>452.0 Moz</td><td>16 Yrs</td><td>Medium</td></tr>
+                            <tr><td>#6 <strong>Polymetal (POLY)</strong></td><td>Kazakh / Russia</td><td>21.0 Moz</td><td>$16.50 / oz</td><td>210.0 Moz</td><td>11 Yrs</td><td>High</td></tr>
+                            <tr><td>#7 <strong>Southern Copper (SCCO)</strong></td><td>Mex / Peru</td><td>19.0 Moz</td><td><span class="badge-success">$8.20 / oz</span></td><td>680.0 Moz</td><td>30 Yrs</td><td>Med-High</td></tr>
+                            <tr><td>#8 <strong>Hindustan Zinc (HZNC)</strong></td><td>India (Rajasthan)</td><td>18.5 Moz</td><td><span class="badge-success">$9.80 / oz</span></td><td>295.0 Moz</td><td>15 Yrs</td><td>Low-Med</td></tr>
+                            <tr><td>#9 <strong>Hecla Mining (HL)</strong></td><td>USA (Alaska/Idaho)</td><td>17.0 Moz</td><td>$11.28 / oz</td><td>231.0 Moz</td><td>14 Yrs</td><td>Low (Tier 1)</td></tr>
+                            <tr><td>#10 <strong>First Majestic (AG)</strong></td><td>Mexico</td><td>14.0 Moz</td><td><span class="badge-danger">$25.68 / oz</span></td><td>185.0 Moz</td><td>8 Yrs</td><td>High</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <section id="tab-substitution" class="tab-content">
+            <div class="card mb-large">
+                <h3>Conductor Substitution Threshold Calculator</h3>
+                <p class="subtitle">Select a target silver spot price to test economic viability and engineering feasibility of copper or aluminum substitution.</p>
+                
+                <div class="calculator-controls">
+                    <label for="silverPriceInput">Simulated Silver Price ($/oz): <span id="priceVal" class="highlight-val">$45.00</span></label>
+                    <input type="range" id="silverPriceInput" min="25" max="100" value="45" step="1">
+                </div>
+
+                <div id="substitutionResult" class="result-box">
+                    <!-- Dynamic Javascript Content -->
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Material Property & Technical Barrier Comparison</h3>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Conductor</th>
+                                <th>Electrical Conduct.</th>
+                                <th>Thermal Conduct.</th>
+                                <th>Raw Cost ($/kg)</th>
+                                <th>Primary Technical Barrier</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Silver ($\text{Ag}$)</strong></td>
+                                <td><span class="badge-success">100% (63 MS/m)</span></td>
+                                <td>429 W/m·K</td>
+                                <td>~$1,050 / kg</td>
+                                <td>High price & vault inventory drain</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Copper ($\text{Cu}$)</strong></td>
+                                <td>94.4% (59.6 MS/m)</td>
+                                <td>401 W/m·K</td>
+                                <td>~$9.50 / kg</td>
+                                <td>Rapid oxidation, silicon migration, electroplating waste</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Aluminum ($\text{Al}$)</strong></td>
+                                <td>61.0% (37.7 MS/m)</td>
+                                <td>237 W/m·K</td>
+                                <td>~$2.60 / kg</td>
+                                <td>Low conductivity, galvanic corrosion, brittle joints</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: SCENARIO SIMULATOR -->
+        <section id="tab-scenarios" class="tab-content">
+            <div class="card mb-large">
+                <h3>⚡ 5-Year Dynamic Quant Scenario Forecasts (2026–2030)</h3>
+                <p class="subtitle">Select a scenario to load its high-resolution monthly supply-demand fundamentals and price trajectory generated by the backend engine.</p>
+
+                <div class="scenario-selector">
+                    <button class="sim-scenario-btn active" data-sim-scenario="base">Base / Normal Scenario</button>
+                    <button class="sim-scenario-btn" data-sim-scenario="bull">Bull / Hyper-Squeeze Scenario</button>
+                    <button class="sim-scenario-btn" data-sim-scenario="bear">Bear / Capitulation Scenario</button>
+                </div>
+
+                <div class="grid-2col" style="margin-top: 2rem;">
+                    <div class="card">
+                        <h4 id="simChartTitle1">Base Scenario: Supply, Demand &amp; Liquid Vault Reserves (Monthly)</h4>
+                        <p class="subtitle" style="margin-bottom: 1rem;">Monthly supply and demand volumes (left) compared to liquid vault free float (right) in Moz.</p>
+                        <div class="chart-wrapper" style="height: 380px;">
+                            <canvas id="chartSimSupplyDemandVault"></canvas>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h4 id="simChartTitle2">Base Scenario: Physical vs Paper Price Path (Monthly)</h4>
+                        <p class="subtitle" style="margin-bottom: 1rem;">Forecasted physical silver spot price vs paper futures price at a 1-month resolution.</p>
+                        <div class="chart-wrapper" style="height: 380px;">
+                            <canvas id="chartSimPricePath"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card" style="margin-top: 2rem; background: rgba(56, 189, 248, 0.03);">
+                    <h3>📊 Custom Run Scenario Audit Summary</h3>
+                    <p class="subtitle">Event triggers and probability distributions for the active scenario selection based on 500-iterations Monte Carlo analysis.</p>
+                    <div class="grid-3col" style="margin-top: 1rem;">
+                        <div class="stat-card danger">
+                            <div class="stat-num" id="simSqueezeProb">0.0%</div>
+                            <div class="stat-desc">🔥 COMEX Squeeze Probability</div>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-num" id="simAIBubble">0.0%</div>
+                            <div class="stat-desc">🖥️ AI Bubble Burst Probability</div>
+                        </div>
+                        <div class="stat-card danger">
+                            <div class="stat-num" id="simMineStrike">0.0%</div>
+                            <div class="stat-desc">⛏️ South American Mining Strikes</div>
+                        </div>
+                        <div class="stat-card highlight">
+                            <div class="stat-num" id="simRetailCap">0.0%</div>
+                            <div class="stat-desc">📉 Retail Demand Capitulation</div>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-num" id="simRefineryCrisis">0.0%</div>
+                            <div class="stat-desc">⚡ Smelter Energy Crisis Bottleneck</div>
+                        </div>
+                        <div class="stat-card info">
+                            <div class="stat-num" id="simSolarSub">0</div>
+                            <div class="stat-desc">🔋 Solar Panel Factory Retooling</div>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-num" id="simBaseMetalShock">0</div>
+                            <div class="stat-desc">📉 Base Metal Recession Shocks</div>
+                        </div>
+                        <div class="stat-card danger">
+                            <div class="stat-num" id="simExportBan">0</div>
+                            <div class="stat-desc">🚫 Export Ban (Resource National)</div>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-num" id="simDefenseStockpile">0</div>
+                            <div class="stat-desc">🛡️ Strategic Defense Stockpiling</div>
+                        </div>
+                        <div class="stat-card danger">
+                            <div class="stat-num" id="simPredatoryAttack">0</div>
+                            <div class="stat-desc">⚔️ Predatory Hedge Fund Attacks</div>
+                        </div>
+                        <div class="stat-card danger">
+                            <div class="stat-num" id="simComexDefault">0</div>
+                            <div class="stat-desc">🏛️ COMEX (New York) Defaults</div>
+                        </div>
+                        <div class="stat-card danger">
+                            <div class="stat-num" id="simLbmaDefault">0</div>
+                            <div class="stat-desc">🇬🇧 LBMA (London) Defaults</div>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-num" id="simEtfRaid">0</div>
+                            <div class="stat-desc">🏴‍☠️ ETF Raids (Emergency Liquid)</div>
+                        </div>
+                        <div class="stat-card info">
+                            <div class="stat-num" id="simJpmDump">0</div>
+                            <div class="stat-desc">🏦 JPM Vault Dumping (>$100)</div>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-num" id="simBillionaireRaid">0</div>
+                            <div class="stat-desc">💼 Billionaire Panic Buying</div>
+                        </div>
+                        <div class="stat-card danger">
+                            <div class="stat-num" id="simRetailMelt">0</div>
+                            <div class="stat-desc">🔥 Retail Coin Melting (>$60)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- SECTION 6: PRICE FORECASTS & DYNAMIC IMPACT ENGINE -->
+        <section id="tab-price" class="tab-content">
+            <!-- Chart 1: Price Forecast Bands & Intraday Spike Peaks -->
+            <div class="card mb-large">
+                <div class="card-header" style="justify-content: space-between; flex-wrap: wrap;">
+                    <div>
+                        <h3>Chart 1: Multi-Year Price Forecast &amp; Squeeze Spike Peaks (2025–2035)</h3>
+                        <p class="subtitle">Comparing Annual Average Base/Bull settlement bounds against Model Projected Intraday Squeeze Spike Peaks.</p>
+                    </div>
+                    <div class="header-metrics">
+                        <div class="metric-pill">
+                            <span class="label">2026 Live Spot</span>
+                            <span id="priceTabLiveSpot" class="value highlight">$58.00 / oz</span>
+                        </div>
+                        <div class="metric-pill">
+                            <span class="label">2028 Squeeze Spike Peak</span>
+                            <span class="value badge-danger">$145 – $165 / oz</span>
+                        </div>
+                        <div class="metric-pill">
+                            <span class="label">2030 Peak Spike</span>
+                            <span class="value badge-danger">$185 – $220 / oz</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-wrapper" style="height: 400px;">
+                    <canvas id="chartPriceForecast"></canvas>
+                </div>
+            </div>
+
+            <!-- Chart 2: Scenario-Based Price Trajectories -->
+            <div class="card mb-large">
+                <div class="card-header">
+                    <div>
+                        <h3>Chart 2: Scenario-Based Price Trajectories (2025–2035)</h3>
+                        <p class="subtitle">Comparing projected price paths under Base Case, Bull Case (Green Transition), Bear Case (Copper Sub), and Supply Crunch Squeeze.</p>
+                    </div>
+                </div>
+
+                <div class="chart-wrapper" style="height: 380px;">
+                    <canvas id="chartScenarioPriceForecast"></canvas>
+                </div>
+            </div>
+
+            <!-- Price Impact Sensitivity Matrix -->
+            <div class="grid-2col mb-large">
+                <div class="card card-bull">
+                    <div class="card-header">
+                        <span class="icon">📈</span>
+                        <h4>Annual Average vs Intraday Squeeze Spike Peak</h4>
+                    </div>
+                    <p class="card-text">In precious metal squeezes (1980 & 2011), <strong>Intraday Spike Peaks overshoot annual averages by +45% to +145%</strong>. While 2028 Annual Average Base is $72–$95/oz, short-squeeze panic will spike prices intraday to <strong>$145.00–$165.00 / oz</strong>.</p>
+                </div>
+
+                <div class="card card-bull">
+                    <div class="card-header">
+                        <span class="icon">⚖️</span>
+                        <h4>Gold-to-Silver Ratio (GSR) Squeeze Compression</h4>
+                    </div>
+                    <p class="card-text">Historical 1980 squeeze compressed GSR down to <strong>15:1</strong>. At $3,000/oz Gold, a squeeze GSR compression to 20:1 delivers an intraday spike of <strong>$150.00 / oz</strong>.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Econometric Multi-Year Price Matrix (Average vs Intraday Spike Peak)</h3>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Year</th>
+                                <th>Data Tier</th>
+                                <th>Bear Case (Low)</th>
+                                <th>Base Annual Avg</th>
+                                <th>Bull Annual Avg</th>
+                                <th>Model Projected Squeeze Peak</th>
+                                <th>Liquid Free Float Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>2025</td><td><span class="badge-success">🟢 Tier A (Historical)</span></td><td>$31.50</td><td>$31.50</td><td>$37.50</td><td>$37.50 / oz</td><td>420.0 Moz (Depleting)</td></tr>
+                            <tr><td>2026</td><td><span class="badge-success">🟢 Tier A (Live Spot)</span></td><td>$58.00</td><td>$58.00</td><td>$58.00</td><td><strong>$58.00 / oz (Live)</strong></td><td><strong>402.5 Moz (Verified)</strong></td></tr>
+                            <tr><td>2027</td><td><span class="badge-info">🔵 Tier C (Model)</span></td><td>$48.00</td><td>$64.00</td><td>$75.00</td><td><span class="badge-danger">$105.00 / oz</span></td><td>320.0 Moz (Tight)</td></tr>
+                            <tr><td>2028</td><td><span class="badge-info">🔵 Tier C (Model)</span></td><td>$45.00</td><td>$72.00</td><td>$95.00</td><td><span class="badge-danger">🚨 $145.00 - $165.00 / oz</span></td><td><span class="badge-danger">204.0 Moz (CRUNCH WINDOW)</span></td></tr>
+                            <tr><td>2029</td><td><span class="badge-info">🔵 Tier C (Model)</span></td><td>$43.00</td><td>$78.00</td><td>$110.00</td><td><span class="badge-danger">$165.00 - $185.00 / oz</span></td><td>95.0 Moz (Critical)</td></tr>
+                            <tr><td>2030</td><td><span class="badge-info">🔵 Tier C (Model)</span></td><td>$42.00</td><td>$85.00</td><td>$125.00</td><td><span class="badge-danger">🔥 $185.00 - $220.00 / oz</span></td><td>15.0 Moz (Zero Float)</td></tr>
+                            <tr><td>2035</td><td><span class="badge-info">🔵 Tier C (Model)</span></td><td>$48.00</td><td>$115.00</td><td>$185.00</td><td>$250.00 / oz</td><td>Physical Squeeze Equilibrium</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <!-- SECTION 8: INSTITUTIONAL COT & ETF VAULT TRACKER -->
+        <section id="tab-cot" class="tab-content">
+            <div class="card mb-large">
+                <div class="card-header">
+                    <div>
+                        <h2>Module C: Institutional COT Positioning & ETF Physical Vault Tracker</h2>
+                        <p class="subtitle">CFTC COMEX Commitment of Traders paper positioning, paper-to-physical contract leverage ratios, and global physical ETF vault holdings (SLV, PSLV, PHAG, ZKB).</p>
+                    </div>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-card danger">
+                        <div class="stat-num">-441.5 Moz</div>
+                        <div class="stat-desc">Commercial Swap Dealer Net Short</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-num">10.0 : 1</div>
+                        <div class="stat-desc">Paper Claims to Registered Vault Ratio</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num">844.6 Moz</div>
+                        <div class="stat-desc">Total ETF Physical Holdings</div>
+                    </div>
+                    <div class="stat-card highlight">
+                        <div class="stat-num">+58.5 Moz</div>
+                        <div class="stat-desc">2026 H1 ETF Physical Inflows</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2col mb-large">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3>Chart 5: CFTC COMEX Net Trader Positioning</h3>
+                            <p class="subtitle">Commercial Swap Dealers Net Short vs Managed Money Hedge Funds Net Long (Moz Equivalent)</p>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper" style="height: 320px;">
+                        <canvas id="chartCotPositioning"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3>Chart 6: Quarterly Physical Silver ETF Inflows & Spot Price</h3>
+                            <p class="subtitle">Net physical accumulation (Moz) vs Silver Spot Price ($/oz) trajectory (2024–2026)</p>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper" style="height: 320px;">
+                        <canvas id="chartEtfFlows"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-large">
+                <h3>Global Physical Silver ETF Holdings Audit</h3>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Ticker</th>
+                                <th>Fund Name</th>
+                                <th>Sponsor / Manager</th>
+                                <th>Custodian & Vault Location</th>
+                                <th>Physical Holdings (Moz)</th>
+                                <th>Share of ETF Metal (%)</th>
+                                <th>Allocation Tier</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>SLV</strong></td>
+                                <td>iShares Silver Trust</td>
+                                <td>BlackRock</td>
+                                <td>JPMorgan Chase (London)</td>
+                                <td><strong>455.2 Moz</strong></td>
+                                <td>53.9%</td>
+                                <td><span class="badge-success">🟢 Tier A (Verified)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>PSLV</strong></td>
+                                <td>Sprott Physical Silver Trust</td>
+                                <td>Sprott Asset Mgmt</td>
+                                <td>Royal Canadian Mint (Ottawa)</td>
+                                <td><strong>178.5 Moz</strong></td>
+                                <td>21.1%</td>
+                                <td><span class="badge-success">🟢 Tier A (100% Allocated)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>PHAG</strong></td>
+                                <td>WisdomTree Physical Silver</td>
+                                <td>WisdomTree</td>
+                                <td>HSBC Bank (London)</td>
+                                <td><strong>88.4 Moz</strong></td>
+                                <td>10.5%</td>
+                                <td><span class="badge-success">🟢 Tier A (Verified)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>ZKB</strong></td>
+                                <td>ZKB Silver ETF</td>
+                                <td>Zürcher Kantonalbank</td>
+                                <td>ZKB Vaults (Zurich)</td>
+                                <td><strong>78.0 Moz</strong></td>
+                                <td>9.2%</td>
+                                <td><span class="badge-success">🟢 Tier A (Verified)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>SIVR</strong></td>
+                                <td>abrdn Physical Silver Standard</td>
+                                <td>Aberdeen Standard</td>
+                                <td>JPMorgan (London)</td>
+                                <td><strong>44.5 Moz</strong></td>
+                                <td>5.3%</td>
+                                <td><span class="badge-success">🟢 Tier A (Verified)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <!-- SECTION 9: REGIONAL ARBITRAGE & RETAIL PREMIUMS -->
+        <section id="tab-arbitrage" class="tab-content">
+            <div class="card mb-large">
+                <div class="card-header">
+                    <div>
+                        <h2>Module D: Regional Arbitrage & Retail Bullion Physical Premiums</h2>
+                        <p class="subtitle">Shanghai Gold Exchange (SGE) physical premium, India MCX import spreads, sovereign coin mint premiums, and West-to-East physical vault drain dynamics.</p>
+                    </div>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-card highlight">
+                        <div class="stat-num">+$5.80 / oz</div>
+                        <div class="stat-desc">Shanghai SGE Spot Premium (+10.0%)</div>
+                    </div>
+                    <div class="stat-card highlight">
+                        <div class="stat-num">+$6.90 / oz</div>
+                        <div class="stat-desc">India MCX Import Spread (+11.9%)</div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-num">9,800 Tonnes</div>
+                        <div class="stat-desc">2026 E India Physical Imports (315 Moz)</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-num">+25.0%</div>
+                        <div class="stat-desc">US Silver Eagle Mint Premium</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2col mb-large">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3>Chart 7: Regional Silver Price & Premium Divergence</h3>
+                            <p class="subtitle">Comparing Equivalent USD/oz prices across London LBMA, NY COMEX, Shanghai SGE, and India MCX</p>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper" style="height: 320px;">
+                        <canvas id="chartRegionalPrices"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3>Chart 8: India Annual Physical Silver Import History</h3>
+                            <p class="subtitle">Import volume in Tonnes (left) & Equivalent Moz (right) following tariff duty reduction (2021–2026)</p>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper" style="height: 320px;">
+                        <canvas id="chartIndiaImports"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-large">
+                <h3>Physical Bullion Retail Mint Premiums Audit (2026 Baseline)</h3>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Sovereign Mint / Refiner</th>
+                                <th>Retail Price ($/oz)</th>
+                                <th>Premium Over Spot ($/oz)</th>
+                                <th>Premium (%)</th>
+                                <th>Data Tier & Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>US Silver Eagle (1 oz Coin)</strong></td>
+                                <td>US Mint (West Point)</td>
+                                <td><strong>$72.50 / oz</strong></td>
+                                <td>+$14.50 / oz</td>
+                                <td><span class="badge-danger">+25.0%</span></td>
+                                <td><span class="badge-success">🟢 Tier A (Verified)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Silver Maple Leaf (1 oz Coin)</strong></td>
+                                <td>Royal Canadian Mint</td>
+                                <td><strong>$66.20 / oz</strong></td>
+                                <td>+$8.20 / oz</td>
+                                <td><span class="badge-info">+14.1%</span></td>
+                                <td><span class="badge-success">🟢 Tier A (Verified)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Britannia (1 oz Coin)</strong></td>
+                                <td>The Royal Mint (UK)</td>
+                                <td><strong>$65.50 / oz</strong></td>
+                                <td>+$7.50 / oz</td>
+                                <td><span class="badge-info">+13.0%</span></td>
+                                <td><span class="badge-success">🟢 Tier A (Verified)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>100 oz Commercial Silver Bar</strong></td>
+                                <td>Valcambi / PAMP / Asahi</td>
+                                <td><strong>$61.20 / oz</strong></td>
+                                <td>+$3.20 / oz</td>
+                                <td><span class="badge-success">+5.5%</span></td>
+                                <td><span class="badge-success">🟢 Tier A (Verified)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>1 kg (32.15 oz) Cast Bar</strong></td>
+                                <td>Heraeus / Umicore</td>
+                                <td><strong>$60.80 / oz</strong></td>
+                                <td>+$2.80 / oz</td>
+                                <td><span class="badge-success">+4.8%</span></td>
+                                <td><span class="badge-success">🟢 Tier A (Verified)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <!-- SECTION 10: GEOPOLITICS & TARIFF RISK MATRIX -->
+        <section id="tab-geopolitics" class="tab-content">
+            <div class="card mb-large">
+                <div class="card-header">
+                    <div>
+                        <h2>Module E: Geopolitical Policy & Tariff Risk Matrix</h2>
+                        <p class="subtitle">Mexican open-pit mining bans, Peruvian corridor blockades, US Department of Energy Critical Material status, and IRA supply chain tax incentives.</p>
+                    </div>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-card danger">
+                        <div class="stat-num">304.3 Moz</div>
+                        <div class="stat-desc">Mexico + Peru Supply (36.0% World Share)</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-num">-30.0 Moz/yr</div>
+                        <div class="stat-desc">Mexican Open-Pit Restriction Supply Risk</div>
+                    </div>
+                    <div class="stat-card highlight">
+                        <div class="stat-num">Critical Material</div>
+                        <div class="stat-desc">US Dept of Energy Formal Designation</div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-num">-52.0 Moz/yr</div>
+                        <div class="stat-desc">Combined Supply Crunch Disruption Drag</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2col mb-large">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3>Chart 9: Top Producing Country Risk Index vs Supply Share</h3>
+                            <p class="subtitle">Comparing Country Risk Scores (1-10) with annual mine production share (%)</p>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper" style="height: 320px;">
+                        <canvas id="chartCountryRisk"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3>Chart 10: Policy Disruption Annual Supply Drag (Moz/yr)</h3>
+                            <p class="subtitle">Estimated mine output reduction by key geopolitical risk catalyst</p>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper" style="height: 320px;">
+                        <canvas id="chartSupplyDisruption"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-large">
+                <h3>Top 7 Silver Producing Nations Risk Audit</h3>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Country</th>
+                                <th>Annual Output (Moz)</th>
+                                <th>Global Share (%)</th>
+                                <th>Risk Score (1-10)</th>
+                                <th>Risk Level</th>
+                                <th>Primary Geopolitical & Regulatory Threat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Mexico</strong></td>
+                                <td>198.5 Moz</td>
+                                <td>23.5%</td>
+                                <td><strong>7.5 / 10</strong></td>
+                                <td><span class="badge-danger">High Risk</span></td>
+                                <td>Open-pit mining ban & CONAGUA water permit limits</td>
+                            </tr>
+                            <tr>
+                                <td><strong>China</strong></td>
+                                <td>110.2 Moz</td>
+                                <td>13.0%</td>
+                                <td><strong>6.0 / 10</strong></td>
+                                <td><span class="badge-warning">Medium Risk</span></td>
+                                <td>Strategic export quota licensing & domestic solar protection</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Peru</strong></td>
+                                <td>105.8 Moz</td>
+                                <td>12.5%</td>
+                                <td><strong>7.0 / 10</strong></td>
+                                <td><span class="badge-danger">High Risk</span></td>
+                                <td>Political turmoil & Arequipa/Puno highway corridor blockades</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Poland</strong></td>
+                                <td>42.1 Moz</td>
+                                <td>5.0%</td>
+                                <td><strong>2.0 / 10</strong></td>
+                                <td><span class="badge-success">Low Risk</span></td>
+                                <td>EU carbon tax & environmental compliance costs</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Chile</strong></td>
+                                <td>40.5 Moz</td>
+                                <td>4.8%</td>
+                                <td><strong>4.5 / 10</strong></td>
+                                <td><span class="badge-warning">Medium Risk</span></td>
+                                <td>Mining royalty tax hikes & national water code reforms</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bolivia</strong></td>
+                                <td>38.2 Moz</td>
+                                <td>4.5%</td>
+                                <td><strong>8.5 / 10</strong></td>
+                                <td><span class="badge-danger">High Risk</span></td>
+                                <td>Foreign currency shortage & state mining quota intervention</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Russia</strong></td>
+                                <td>37.0 Moz</td>
+                                <td>4.4%</td>
+                                <td><strong>9.0 / 10</strong></td>
+                                <td><span class="badge-danger">Severe Sanctions</span></td>
+                                <td>LBMA Good Delivery suspension & OFAC sanctions</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 11: RECYCLING & E-WASTE -->
+        <section id="tab-recycling" class="tab-content">
+            <div class="card mb-large">
+                <div class="card-header">
+                        <h2>Module F: Recycling Technologies & E-Waste Recovery Scalability</h2>
+                        <p class="subtitle">Secondary silver supply streams (193.0 Moz in 2026), urban e-waste mining economics, spent EO catalyst recovery, and scrap price-elasticity ceiling modeling.</p>
+                    </div>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-num">193.0 Moz</div>
+                        <div class="stat-desc">2026 Total Secondary Supply (18.6% of World Total)</div>
+                    </div>
+                    <div class="stat-card highlight">
+                        <div class="stat-num">102.5 Moz</div>
+                        <div class="stat-desc">Industrial Scrap & EO Catalyst Share (53.1%)</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-num">275.0 Moz</div>
+                        <div class="stat-desc">Max Technical Scrap Ceiling (at $100+/oz)</div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-num">30% - 45%</div>
+                        <div class="stat-desc">Max Deficit Cushioning Potential</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2col mb-large">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3>Chart 11: Secondary Silver Recycling Breakdown by Source (2020–2026)</h3>
+                            <p class="subtitle">Industrial EO Catalysts vs Jewelry Dishoarding vs Photographic vs Urban E-Waste Mining</p>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper" style="height: 320px;">
+                        <canvas id="chartScrapBreakdown"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3>Chart 12: Scrap Supply Price-Elasticity Curve ($35 to $100+/oz)</h3>
+                            <p class="subtitle">Projected annual secondary recycling supply output (Moz/yr) across spot price bands</p>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper" style="height: 320px;">
+                        <canvas id="chartPriceElasticity"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-large">
+                <h3>E-Waste Recycling Technology Process Audit</h3>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Process Technology</th>
+                                <th>Recovery Rate (%)</th>
+                                <th>Processing Cost ($/oz Ag)</th>
+                                <th>Key Bottlenecks & Limitations</th>
+                                <th>Data Tier</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Pyrometallurgical Smelting</strong></td>
+                                <td><strong>98.2%</strong></td>
+                                <td>$18.20 / oz</td>
+                                <td>High CAPEX energy smelters (Umicore / Boliden / Aurubis)</td>
+                                <td><span class="badge-success">🟢 Tier A (Verified)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Hydrometallurgical Leaching</strong></td>
+                                <td><strong>94.5%</strong></td>
+                                <td>$14.50 / oz</td>
+                                <td>Eco-toxic chemical waste handling & environmental compliance</td>
+                                <td><span class="badge-success">🟢 Tier A (Verified)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bio-Leaching (Advanced)</strong></td>
+                                <td><strong>88.0%</strong></td>
+                                <td>$11.00 / oz</td>
+                                <td>Slow bio-leaching reaction kinetics (long leaching residency)</td>
+                                <td><span class="badge-info">🔵 Tier C (Pilot Scale)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <!-- SECTION 12: DEFENSE & AEROSPACE HIGH-VALUE APPLICATIONS -->
+        <section id="tab-defense" class="tab-content">
+            <div class="card mb-large">
+                <div class="card-header">
+                    <div>
+                        <h2>Module G: Defense, Aerospace & High-Frequency Power Electronics</h2>
+                        <p class="subtitle">Guided missile thermal batteries (Ag-Zn/Ag-Cl), LEO satellite solar arrays (Starlink/Kuiper), 99.5% optical laser reflectivity, and 100% price inelasticity analysis.</p>
+                    </div>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-card highlight">
+                        <div class="stat-num">18.0 Moz</div>
+                        <div class="stat-desc">2026 Defense & Aerospace Ag Demand</div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-num">0.0 Score</div>
+                        <div class="stat-desc">Price Elasticity (100% Price Inelastic)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num">7.5 Moz</div>
+                        <div class="stat-desc">2026 LEO Satellite Solar Array Demand</div>
+                    </div>
+                    <div class="stat-card highlight">
+                        <div class="stat-num">99.5%</div>
+                        <div class="stat-desc">Optical Mirror Reflectivity (Vis-IR Spectrum)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2col mb-large">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3>Chart 13: Defense & Aerospace Silver Demand by Application (2024–2026)</h3>
+                            <p class="subtitle">Missile Thermal Batteries vs Satellite Solar Arrays vs Mil Radar RF vs Optical Optics</p>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper" style="height: 320px;">
+                        <canvas id="chartDefenseDemand"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3>Chart 14: Global LEO Satellite Deployments & Ag Demand Forecast (2024–2030)</h3>
+                            <p class="subtitle">Annual satellites launched (left) vs satellite silver consumption in Moz (right)</p>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper" style="height: 320px;">
+                        <canvas id="chartSatelliteForecast"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-large">
+                <h3>Military & Aerospace High-Value Applications Audit</h3>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Application Sector</th>
+                                <th>Weapon / System Type</th>
+                                <th>Silver Loading per Unit</th>
+                                <th>Technical Role</th>
+                                <th>Price Elasticity</th>
+                                <th>Data Tier</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Guided Missile Thermal Batteries</strong></td>
+                                <td>Patriot PAC-3 / AMRAAM / Tomahawk</td>
+                                <td>150g - 1,200g per missile</td>
+                                <td>Instantaneous power density, 20-yr inert shelf life</td>
+                                <td><span class="badge-danger">0.0 (100% Inelastic)</span></td>
+                                <td><span class="badge-success">🟢 Tier A (Verified)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Satellite Solar Arrays (LEO)</strong></td>
+                                <td>Starlink / Project Kuiper / MilSat</td>
+                                <td>~40.2g per satellite</td>
+                                <td>Atomic oxygen resistance, thermal cycle interconnects</td>
+                                <td><span class="badge-danger">0.0 (100% Inelastic)</span></td>
+                                <td><span class="badge-success">🟢 Tier A (Verified)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Military Radar &amp; RF Waveguides</strong></td>
+                                <td>AESA Radar (F-35 / Eurofighter)</td>
+                                <td>RF Silver Plating Layer</td>
+                                <td>Zero skin-effect signal loss at 30-300 GHz</td>
+                                <td><span class="badge-danger">0.0 (100% Inelastic)</span></td>
+                                <td><span class="badge-success">🟢 Tier A (Verified)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Defense Optical &amp; Laser Optics</strong></td>
+                                <td>Space Lidar &amp; Directed Energy</td>
+                                <td>Vapor-deposited Ag Coating</td>
+                                <td>99.5% optical reflectivity, thermal laser absorption protection</td>
+                                <td><span class="badge-danger">0.0 (100% Inelastic)</span></td>
+                                <td><span class="badge-success">🟢 Tier A (Verified)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <!-- SECTION 13: AI ALGORITHMIC SENTIMENT & MACRO SIGNALS -->
+        <section id="tab-macro" class="tab-content">
+            <div class="card mb-large">
+                <div class="card-header">
+                    <div>
+                        <h2>Module H: AI Algorithmic Sentiment & Macro Econometric Signals</h2>
+                        <p class="subtitle">Multi-variate macro regression models, Gold-to-Silver Ratio (GSR) mean-reversion matrix, paper-to-physical short squeeze probability index, and AI sentiment scoring.</p>
+                    </div>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-card danger">
+                        <div class="stat-num">88.5%</div>
+                        <div class="stat-desc">2026 Short Squeeze Probability Index</div>
+                    </div>
+                    <div class="stat-card highlight">
+                        <div class="stat-num">-4.20 Beta</div>
+                        <div class="stat-desc">US 10-Yr Real Yield Sensitivity</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-num">30:1 - 35:1</div>
+                        <div class="stat-desc">Target GSR Mean Reversion Range</div>
+                    </div>
+                    <div class="stat-card highlight">
+                        <div class="stat-num">+0.82 Score</div>
+                        <div class="stat-desc">AI Algorithmic Sentiment (Extremely Bullish)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2col mb-large">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3>Chart 15: Quantitative Short Squeeze Probability Index Trajectory (2024–2030)</h3>
+                            <p class="subtitle">Composite score (%) based on Swap short leverage, Free float depletion, and ETF inflow momentum</p>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper" style="height: 320px;">
+                        <canvas id="chartSqueezeIndex"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3>Chart 16: Gold-to-Silver Ratio (GSR) Mean Reversion Matrix</h3>
+                            <p class="subtitle">Projected Silver Spot Prices ($/oz) under varying Gold Price & GSR Target compression bands</p>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper" style="height: 320px;">
+                        <canvas id="chartGsrMatrix"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-large">
+                <h3>Multi-Variate Macro Econometric Regression Matrix</h3>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Macro Factor</th>
+                                <th>Baseline Value (2026)</th>
+                                <th>Beta Coefficient ($\beta$)</th>
+                                <th>Unit Sensitivity Impact</th>
+                                <th>Correlation Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>US 10-Yr Real Yield (TIPS)</strong></td>
+                                <td>1.45%</td>
+                                <td><strong style="color:#f87171">-4.20</strong></td>
+                                <td>-1.0% drop in real yield = <strong>+$12.60 / oz</strong></td>
+                                <td>Inverse Correlation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>US Dollar Index (DXY)</strong></td>
+                                <td>101.5</td>
+                                <td><strong style="color:#f87171">-1.80</strong></td>
+                                <td>-5.0% drop in DXY = <strong>+$5.20 / oz</strong></td>
+                                <td>Inverse Correlation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Global M2 Money Supply</strong></td>
+                                <td>$108.5 Trillion</td>
+                                <td><strong style="color:#34d399">+2.40</strong></td>
+                                +8% M2 expansion = <strong>+$8.50 / oz</strong></td>
+                                <td>Direct Correlation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Industrial Market Deficit</strong></td>
+                                <td>-46.3 Moz</td>
+                                <td><strong style="color:#34d399">+3.10</strong></td>
+                                <td>+50 Moz deficit expansion = <strong>+$15.50 / oz</strong></td>
+                                <td>Direct Correlation</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    <!-- SECTION 14: PURE INTERNAL PHYSICAL SQUEEZE ENGINE -->
+        <section id="tab-puresqueeze" class="tab-content">
+            <div class="card mb-large">
+                <div class="card-header">
+                    <div>
+                        <h2>🔥 God-Tier Physical Squeeze Engine</h2>
+                        <p class="subtitle">Live simulation data plotting exact Peak Squeeze Prices ($/oz) derived 100% from internal physical mechanics (ETF Raids, India Arbitrage, and Sovereign Leasing).</p>
+                    </div>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-card danger">
+                        <div class="stat-num" id="ui-avg-peak">Loading...</div>
+                        <div class="stat-desc">Average Squeeze Peak Price</div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-num" id="ui-max-peak">Loading...</div>
+                        <div class="stat-desc">Absolute Max Peak Price</div>
+                    </div>
+                    <div class="stat-card highlight">
+                        <div class="stat-num" id="ui-etf-raids">Loading...</div>
+                        <div class="stat-desc">ETF Raids Triggered</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num" id="ui-india-arb">Loading...</div>
+                        <div class="stat-desc">India Charter Flights</div>
+                    </div>
+                </div>
+
+                <div class="chart-wrapper mt-large">
+                    <canvas id="chartPureSqueeze"></canvas>
+                </div>
+            </div>
+            <!-- NEW: GOD-TIER SHOCK EVENTS -->
+            <div class="card mb-large">
+                <div class="card-header">
+                    <div>
+                        <h3>🌪️ God-Tier Macro Shock Events (100-Iteration Probability Engine)</h3>
+                        <p class="subtitle">Live outputs from the backend Monte-Carlo simulator showcasing black swan events, geopolitical blockades, and psychological tipping points.</p>
+                    </div>
+                </div>
+                
+                <div class="grid-3col" style="margin-top: 1.5rem;">
+                    <div class="stat-card danger">
+                        <div class="stat-num" id="statSqueezeProb">0.0%</div>
+                        <div class="stat-desc">🔥 COMEX Squeeze Probability</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-num" id="statAIBubble">0.0%</div>
+                        <div class="stat-desc">🖥️ AI Bubble Burst Probability</div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-num" id="statMineStrike">0.0%</div>
+                        <div class="stat-desc">⛏️ South American Mining Strikes</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-num" id="statRetailCap">0.0%</div>
+                        <div class="stat-desc">📉 Retail Capitulation Event</div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-num" id="statRefineryCrisis">0.0%</div>
+                        <div class="stat-desc">⚡ Smelter Energy Crisis</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-num" id="statBaseMetalShock">0</div>
+                        <div class="stat-desc">📉 Base Metal Recession Shocks</div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-num" id="statExportBan">0</div>
+                        <div class="stat-desc">🚫 Export Ban (Resource National)</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-num" id="statDefenseStockpile">0</div>
+                        <div class="stat-desc">🛡️ Strategic Defense Stockpiling</div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-num" id="statPredatoryAttack">0</div>
+                        <div class="stat-desc">🦈 Predatory Hedge Fund Attacks</div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-num" id="statComexDefault">0</div>
+                        <div class="stat-desc">🏛️ COMEX (New York) Defaults</div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-num" id="statLbmaDefault">0</div>
+                        <div class="stat-desc">🇬🇧 LBMA (London) Defaults</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-num" id="statEtfRaid">0</div>
+                        <div class="stat-desc">🏴‍☠️ ETF Raids (Emergency Liquid)</div>
+                    </div>
+                    <div class="stat-card info">
+                        <div class="stat-num" id="statJpmDump">0</div>
+                        <div class="stat-desc">🏦 JPM Vault Dumping (>$100)</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-num" id="statBillionaireRaid">0</div>
+                        <div class="stat-desc">💼 Billionaire Panic Buying</div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-num" id="statRetailMelt">0</div>
+                        <div class="stat-desc">🔥 Retail Coin Melting (>$60)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Pure Squeeze Calculator -->
+            <div class="card mb-large">
+                <h3>Interactive Pure Squeeze Peak Calculator</h3>
+                <p class="subtitle">Adjust the Remaining Vault Free Float (Moz) and Annual Industrial Deficit (Moz) to calculate the resulting Pure Physical Squeeze Peak Price ($/oz).</p>
+                
+                <div class="grid-2col" style="margin-top: 1.5rem;">
+                    <div>
+                        <div class="calculator-controls" style="margin-bottom: 1.5rem;">
+                            <label for="pureFreeFloatInput">Remaining Vault Free Float (Moz): <span id="pureFreeFloatVal" class="highlight-val">204.0 Moz</span></label>
+                            <input type="range" id="pureFreeFloatInput" min="15" max="450" value="204" step="5">
+                        </div>
+                        <div class="calculator-controls">
+                            <label for="pureDeficitInput">Annual Market Deficit (Moz/yr): <span id="pureDeficitVal" class="highlight-val">-115.0 Moz</span></label>
+                            <input type="range" id="pureDeficitInput" min="10" max="250" value="115" step="5">
+                        </div>
+                    </div>
+
+                    <div class="result-box" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: rgba(239, 68, 68, 0.1); border: 1.5px solid rgba(239, 68, 68, 0.4); padding: 1.5rem; border-radius: 12px;">
+                        <span style="font-size: 0.9rem; text-transform: uppercase; color: #94a3b8; letter-spacing: 1px;">Calculated Pure Physical Squeeze Peak</span>
+                        <div id="pureSqueezePeakOutput" style="font-size: 3rem; font-weight: 800; color: #f87171; margin: 0.5rem 0;">$155.20 / oz</div>
+                        <span id="pureSqueezeStatusText" style="font-size: 0.95rem; color: #fbbf24;">⚡ Critical Scarcity Threshold Breached</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-large">
+                <div class="card-header">
+                    <div>
+                        <h3>Chart 17: Pure Physical Vault Scarcity vs Calculated Squeeze Peak Curve (2024–2030)</h3>
+                        <p class="subtitle">Comparing liquid free float inventory drain (bars) against calculated pure physical squeeze peak price curve (line)</p>
+                    </div>
+                </div>
+                <div class="chart-wrapper" style="height: 380px;">
+                    <canvas id="chartPureSqueezeCurve"></canvas>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="app-footer">
+        <div class="footer-container">
+            <p>Silver Intelligence Suite &copy; 2026 | Built for In-Depth Commodity & Macroeconomic Analysis</p>
+            <p class="footer-links">
+                <a href="silver_master_report.md" target="_blank">Master Report (Markdown)</a> |
+                <a href="factual_reports/01_positive_negative_thesis.md" target="_blank">Thesis Report</a> |
+                <a href="scenarios_and_possibilities/06_multi_year_price_forecast.md" target="_blank">Price Model</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

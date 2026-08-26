@@ -4,6 +4,13 @@ import csv
 from typing import Dict, Any
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
+import sys
+import os
+
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, os.path.join(ROOT_DIR, 'src'))
+
+from realworld import fetch_live_market_data
 
 app = FastAPI()
 
@@ -63,6 +70,11 @@ def simulate() -> Dict[str, Dict[str, Any]]:
     if not simulation_cache:
         simulation_cache = load_simulation_data()
     return simulation_cache
+
+@app.get("/api/live")
+def live_market_data() -> Dict[str, Any]:
+    """Fetch real-world live market data."""
+    return fetch_live_market_data()
 
 # Mount static files (css, js)
 app.mount("/", StaticFiles(directory=WEB_DIR, html=True), name="static")

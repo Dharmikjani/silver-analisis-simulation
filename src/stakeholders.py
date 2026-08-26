@@ -48,11 +48,16 @@ class PrimaryMiners(Stakeholder):
         output = production
         
         if price < aisc:
-            self.mines_shutdown = 0 # Miners don't shutdown, they just hoard
+            self.mines_shutdown += 1
+            if self.mines_shutdown > TRADING_DAYS * 1.5:
+                # Bankruptcy! Mine shuts down completely.
+                self.daily_volume = 0
+                return 0.0
+                
             if price < aisc * 0.80:
-                withhold_ratio = 0.90 # Withhold 90% of sales
+                withhold_ratio = 0.40 # Withhold max 40% (must sell 60% to service debt)
             else:
-                withhold_ratio = 0.50 # Withhold 50% of sales
+                withhold_ratio = 0.20 # Withhold 20%
                 
             withheld_amount = production * withhold_ratio
             self.withheld_inventory += withheld_amount
@@ -108,7 +113,6 @@ class ScrapRefiners(Stakeholder):
     def __init__(self, name, annual_base_volume):
         super().__init__(name, annual_base_volume)
         self.scrap_fatigue_days = 0
-        self.total_scrap_inventory = 1500.0 # Global above-ground meltable scrap pool
         self.price_history = []
         
     def process_day(self, price, macro):
@@ -121,12 +125,12 @@ class ScrapRefiners(Stakeholder):
         
         price_momentum = 1.0
         if len(self.price_history) == 30:
-            momentum_ratio = price / self.price_history[0]
+            momentum_ratio = price / max(0.01, self.price_history[0])
             # FIX: Reversed order so high-momentum branch (2.5x) is reachable
             if momentum_ratio > 1.5: price_momentum = 2.5
             elif momentum_ratio > 1.2: price_momentum = 1.5
         
-        if self.total_scrap_inventory <= 0:
+        if macro.global_scrap_pool <= 0:
             self.scrap_fatigue_days += 1
             return 0 # Completely dried up
             
@@ -138,17 +142,15 @@ class ScrapRefiners(Stakeholder):
             scrap_multiplier = 1.0 + ((price - 100) / 10.0) * 0.10
             actual_output *= scrap_multiplier
             
-        if price_momentum > 1.0 or price > 100:
-            dump_amount = min(self.total_scrap_inventory, actual_output)
-            self.total_scrap_inventory -= dump_amount
-            return dump_amount
-            
         # User Domain Expertise: If price is too low, people stop selling scrap
         hoard_threshold = 15.0 * macro.m2_inflation_index
         if price < hoard_threshold:
-            return 0.0
+            actual_output = 0.0
             
-        return actual_output
+        # FIX: Draw from the global pool always, capping at what's available
+        dump_amount = min(macro.global_scrap_pool, actual_output)
+        macro.global_scrap_pool -= dump_amount
+        return dump_amount
 
 class EWasteRecyclers(Stakeholder):
     def __init__(self, name, annual_base_volume):
@@ -165,24 +167,28 @@ class EWasteRecyclers(Stakeholder):
             
         refining_margin = price / (40.0 * max(0.01, macro.m2_inflation_index)) # Needs high prices to be profitable
         if refining_margin > 1.0:
-            return min((120.0 / TRADING_DAYS), self.daily_volume * self.tech_obsolescence_rate * refining_margin)
-        return self.daily_volume
+            actual_output = min((120.0 / TRADING_DAYS), self.daily_volume * self.tech_obsolescence_rate * refining_margin)
+        else:
+            actual_output = self.daily_volume
+            
+        dump_amount = min(macro.global_ewaste_pool, actual_output)
+        macro.global_ewaste_pool -= dump_amount
+        return dump_amount
 
 class DeepPrivateHoarders(Stakeholder):
-    """FIX #7 (Competitor): Split hoarder hive-mind into N independent sub-agents
-    with randomized thresholds and staggered reaction delays."""
+    """Fundamentalist Agent (Agent-Based Modeling)
+    Calculates intrinsic value and acts counter-cyclically (buying dips, selling extreme deviations)."""
     def __init__(self, name, annual_base_volume, num_agents=5):
         super().__init__(name, annual_base_volume)
         self.total_hoard = 2500.0 
         self.price_history = []
         self.num_agents = num_agents
-        # Each sub-agent has a different dump threshold multiplier and reaction lag
         self.sub_agents = []
         for i in range(num_agents):
             self.sub_agents.append({
                 'share': self.total_hoard / num_agents,
-                'dump_threshold_mult': random.uniform(0.85, 1.15),  # ±15% around $150 base
-                'momentum_lag': random.randint(5, 30),  # 5-30 day reaction delay
+                'value_perception_mult': random.uniform(0.80, 1.20),
+                'reaction_lag': random.randint(1, 10),
                 'price_buffer': [],
             })
         
@@ -191,27 +197,32 @@ class DeepPrivateHoarders(Stakeholder):
         if len(self.price_history) > 60: self.price_history.pop(0)
         
         total_dump = 0.0
+        # Fundamental intrinsic value model based on M2 and start price
+        base_price = macro.config.start_silver_price if macro.config else 25.0
+        if base_price <= 0.0: base_price = 25.0 # Fallback
+        intrinsic_value = base_price * max(1.0, macro.m2_inflation_index)
         
         for agent in self.sub_agents:
             agent['price_buffer'].append(price)
-            if len(agent['price_buffer']) > agent['momentum_lag']:
+            if len(agent['price_buffer']) > agent['reaction_lag']:
                 agent['price_buffer'].pop(0)
             
-            # AI Accumulation: High fear = Hoard more (all agents agree on this)
-            if macro.geopolitical_tension_index > 80:
-                accumulation = (10.0 / TRADING_DAYS) / self.num_agents
+            perceived_value = intrinsic_value * agent['value_perception_mult']
+            
+            # Fundamentalist Buying: If price is significantly below perceived value
+            if price < perceived_value * 0.8:
+                accumulation = (15.0 / TRADING_DAYS) / self.num_agents
                 agent['share'] += accumulation
                 continue
-            
-            # AI Dumping: Each agent has its own threshold and checks its own lagged momentum
-            threshold_base = macro.config.start_silver_price * macro.config.thresholds.hoarder_dump_multiplier if macro.config else 150
-            threshold = threshold_base * macro.m2_inflation_index * agent['dump_threshold_mult']
-            if agent['share'] > 0 and price > threshold:
-                if len(agent['price_buffer']) == agent['momentum_lag']:
-                    if price < agent['price_buffer'][0] * 0.95:
-                        dump = min(agent['share'], random.uniform(200, 500) / TRADING_DAYS / self.num_agents)
-                        agent['share'] -= dump
-                        total_dump += dump
+                
+            # Fundamentalist Selling: If price is significantly above perceived value
+            if agent['share'] > 0 and price > perceived_value * 1.5:
+                # Smoothing the dump: scale based on overvaluation
+                overvaluation_ratio = price / perceived_value
+                dump_factor = min(1.0, (overvaluation_ratio - 1.5) / 2.0)
+                dump = min(agent['share'], (500.0 * dump_factor) / TRADING_DAYS / self.num_agents)
+                agent['share'] -= dump
+                total_dump += dump
         
         self.total_hoard = sum(a['share'] for a in self.sub_agents)
         return total_dump
@@ -299,6 +310,9 @@ class SolarPV(Stakeholder):
             self.daily_volume *= math.exp((macro.global_gdp_growth) * dt)
         else:
             self.daily_volume *= math.exp((macro.global_gdp_growth + 0.05) * dt)
+            
+        # FIX: Macro-economic saturation cap (Logistic S-curve limit)
+        self.daily_volume = min(self.daily_volume, 1000.0 / TRADING_DAYS)
         
         # FIX #7: Silver loading thrifting — cells use ~3% less silver per year (industry trend since 2015)
         if macro.current_year >= 2015:
@@ -375,6 +389,9 @@ class EV_Auto(Stakeholder):
         else:
             self.daily_volume *= math.exp(0.08 / TRADING_DAYS)
             
+        # FIX: Macro-economic saturation cap (Logistic S-curve limit)
+        self.daily_volume = min(self.daily_volume, 400.0 / TRADING_DAYS)
+            
         return self.daily_volume * self.battery_tech_cycle
 
 class JewelrySilverware(Stakeholder):
@@ -395,6 +412,7 @@ class JewelrySilverware(Stakeholder):
         elif safe_price > high_threshold: return self.daily_volume * 0.80 * purchasing_power
         else:
             self.daily_volume *= math.exp(0.01 / TRADING_DAYS) # Cap infinite compounding, 1% annual growth
+            self.daily_volume = min(self.daily_volume, 600.0 / TRADING_DAYS) # FIX: S-curve max cap
             return self.daily_volume * purchasing_power
 
 class OtherIndustrial(Stakeholder):
@@ -501,7 +519,19 @@ class Gov_China(Stakeholder):
         # User Domain Expertise: If silver is dirt cheap, Sovereign wealth funds drain the market
         dip_buy_threshold = 15.0 * macro.m2_inflation_index
         if price < dip_buy_threshold:
-            self._current_accumulation_rate = 1000.0 # 1000 Moz/year (Hyper-elasticity black hole)
+            # TWAP Execution logic to prevent spoofing their own order
+            # Scales inversely with price momentum - buy aggressively on red days, cautiously on green
+            momentum = price / max(0.1, self.price_history[-1] if hasattr(self, 'price_history') and self.price_history else price)
+            if momentum > 1.05:
+                self._current_accumulation_rate = 50.0 # Pull back if price is running
+            elif momentum < 0.95:
+                self._current_accumulation_rate = 1000.0 # Smash the bid on red days
+            else:
+                self._current_accumulation_rate = 250.0
+                
+        if not hasattr(self, 'price_history'): self.price_history = []
+        self.price_history.append(price)
+        if len(self.price_history) > 10: self.price_history.pop(0)
         
         daily_accumulation = self._current_accumulation_rate / TRADING_DAYS
         cost = daily_accumulation * price
@@ -538,6 +568,8 @@ class Gov_UK:
         return False
 
 class RetailInvestors(Stakeholder):
+    """Chartist / Trend-Follower Agent (Agent-Based Modeling)
+    Ignores fundamentals, buys based on moving average crossovers and momentum."""
     def __init__(self, name, annual_base_volume):
         super().__init__(name, annual_base_volume)
         self.price_history = []
@@ -547,36 +579,35 @@ class RetailInvestors(Stakeholder):
         if len(self.price_history) > 200: self.price_history.pop(0)
         
         vol = self.daily_volume
-        fomo_multiplier = 1.0
+        momentum_multiplier = 1.0
         
-        # User Domain Expertise: Buy the absolute dip. If price < $15, physical drain happens
-        dip_buy_threshold = 15.0 * macro.m2_inflation_index
-        if price < dip_buy_threshold:
-            return vol * 20.0 # 20x demand when silver crashes to $10-$15
-        
-        # AI Logic: FOMO Index based on 50 SMA and 200 SMA
+        # Chartist Logic: Moving Average Crossovers
         if len(self.price_history) == 200:
             sma_50 = sum(self.price_history[-50:]) / 50.0
             sma_200 = sum(self.price_history) / 200.0
             
+            # Golden Cross + Trend confirmation (Momentum Buying)
             if sma_50 > sma_200 and price > sma_50:
-                # FIX #3: Continuous FOMO scaling based on distance above 50 SMA
                 distance = (price - sma_50) / sma_50
-                fomo_multiplier = 1.0 + min(4.0, distance * 10.0) # Scales smoothly up to 5.0
-            elif sma_50 < sma_200:
-                fomo_multiplier = 0.5 # Death Cross Fear
+                # Momentum buying scales with distance from 50 SMA
+                momentum_multiplier = 1.0 + min(5.0, distance * 12.0)
+            # Breakdown (Panic Selling)
+            elif price < sma_50:
+                distance = (sma_50 - price) / sma_50
+                momentum_multiplier = max(0.1, 1.0 - distance * 2.0)
         
         if macro.fed_funds_rate < 1.0: vol *= 1.2
+        
         safe_price = max(1.0, price)
+        # Purchasing power destruction at extreme prices
         if safe_price > (300 * macro.m2_inflation_index):
             purchasing_power_ratio = (100.0 * macro.m2_inflation_index) / safe_price
             vol *= max(0.1, min(2.0, purchasing_power_ratio))
             
-        # Scenario: Retail Capitulation shifts retail capital into gold/crypto (80% drop)
         if macro.retail_capitulation:
             vol *= 0.20
             
-        return vol * fomo_multiplier
+        return vol * momentum_multiplier
 
 class WhaleSyndicate:
     def __init__(self):
@@ -592,14 +623,22 @@ class WhaleSyndicate:
             # FIX #9: Vulnerability decays when conditions normalize
             self.bank_vulnerability_score = max(0.0, self.bank_vulnerability_score - 5.0)
             
-        if self.bank_vulnerability_score > 100.0 and self.attack_volume_remaining <= 0:
-            # Execute coordinated squeeze attack
-            self.bank_vulnerability_score = 0.0 # Reset after attack
-            self.attack_volume_remaining = random.uniform(100.0, 250.0)
+        # Execute coordinated squeeze attack probabilistically using a sigmoid curve
+        # At score 100, 50% daily chance to attack.
+        val = -(self.bank_vulnerability_score - 100.0) * 0.1
+        val = max(-700, min(700, val))
+        attack_prob = 1.0 / (1.0 + math.exp(val))
+        
+        if self.attack_volume_remaining <= 0 and random.random() < attack_prob:
+            self.bank_vulnerability_score = 0.0
+            # Realistic: even a large family office buys 10-30 Moz over weeks, not 250 Moz in days
+            self.attack_volume_remaining = random.uniform(10.0, 30.0)
             print(f"[WhaleSyndicate] Blood in the water! Coordinated buy attack executed! Target: {self.attack_volume_remaining:.1f} Moz")
             
         if self.attack_volume_remaining > 0:
-            daily_drain = min(self.attack_volume_remaining, 10.0) # Drain up to 10 Moz/day
+            # TWAP execution: spread over ~3 weeks (5% per day = 20 trading days to complete)
+            # This is realistic for a large institutional buyer trying to not move the market
+            daily_drain = min(self.attack_volume_remaining, max(0.5, self.attack_volume_remaining * 0.05))
             self.attack_volume_remaining -= daily_drain
             return daily_drain
             
@@ -613,13 +652,22 @@ class PredatoryHedgeFund:
         self.target_price = 0.0
         
     def process_attack(self, comex_float, physical_price, macro=None):
-        # Trigger condition: Vulnerable float
-        if not self.is_squeezing and not self.is_dumping and comex_float < 100.0:
-            prob = macro.config.thresholds.prob_predatory_squeeze if (macro and macro.config) else 0.20
-            if random.random() < (prob / TRADING_DAYS): 
+        # Trigger condition: Probabilistic soft threshold using a Sigmoid function based on COMEX float
+        if not self.is_squeezing and not self.is_dumping:
+            # Sigmoid probability curve: As float drops below 150, probability of attack increases non-linearly
+            # Center of sigmoid (50% max prob) is at 75 Moz. Steepness is -0.1.
+            val = (comex_float - 75.0) * 0.1
+            val = max(-700, min(700, val))
+            sigmoid_prob = 1.0 / (1.0 + math.exp(val))
+            base_prob = macro.config.thresholds.prob_predatory_squeeze if (macro and macro.config) else 0.20
+            
+            # The lower the float, the higher the daily probability of a squeeze
+            daily_attack_prob = (base_prob * sigmoid_prob) / TRADING_DAYS
+            
+            if random.random() < daily_attack_prob: 
                 self.is_squeezing = True
                 self.target_price = physical_price * 1.5 # Target 50% gain
-                print(f"[PredatoryHedgeFund] Squeeze initiated! Target: ${self.target_price:.2f}")
+                print(f"[PredatoryHedgeFund] Squeeze initiated! Target: ${self.target_price:.2f} (Float: {comex_float:.1f})")
                 
         if self.is_squeezing:
             if physical_price >= self.target_price or self.holdings >= 40.0:
@@ -668,25 +716,61 @@ class OptionsMarketMakers:
         return gamma_demand
 
 class ExchangeMarginControls:
+    """
+    Real-world COMEX margin hike logic based on 1980 (Hunt Brothers) and 2011 events.
+    
+    How real margin hikes work:
+    - COMEX watches cumulative price moves over 10 trading days.
+    - If silver has run >20% in 10 days, they raise margins to force leveraged longs to exit.
+    - They can hike multiple times in a campaign (2011: 5 hikes in 9 days).
+    - Cooldown between individual hikes: ~5 trading days.
+    - The campaign ENDS when price starts falling for 5 consecutive days (mission accomplished).
+    - Paper dump per hike: realistic ~2-3 Moz/day forced liquidation, not 50.
+    """
     def __init__(self):
         self.margin_hike_active = False
         self.days_since_hike = 0
-        
+        self.consecutive_down_days = 0
+        self.price_history = []  # Track 10-day window
+
     def process_day(self, price_momentum, implied_volatility):
-        # Exchange intervenes when things get out of control (like 2011 or 1980)
-        # We trigger forced liquidation paper dumping
-        if price_momentum > 1.4 or implied_volatility > 0.80:
+        self.price_history.append(price_momentum)
+        if len(self.price_history) > 10:
+            self.price_history.pop(0)
+
+        # Calculate 10-day cumulative return (product of daily ratios)
+        cumulative_10d = 1.0
+        if len(self.price_history) == 10:
+            for pm in self.price_history:
+                cumulative_10d *= pm
+        ten_day_return = cumulative_10d - 1.0  # e.g. 0.22 = 22% in 10 days
+
+        # Track consecutive down days (price_momentum < 1.0 = price fell that day)
+        if price_momentum < 1.0:
+            self.consecutive_down_days += 1
+        else:
+            self.consecutive_down_days = 0
+
+        # END the hike campaign if price has been falling 5 days in a row
+        if self.margin_hike_active and self.consecutive_down_days >= 5:
+            self.margin_hike_active = False
+            self.days_since_hike = 0
+            return 0.0
+
+        # TRIGGER: 10-day move >20% (realistic — 2011 silver went ~17% in 10 days before first hike)
+        can_hike_again = (self.days_since_hike == 0 or self.days_since_hike >= 5)
+        if ten_day_return > 0.20 and can_hike_again:
             if not self.margin_hike_active:
-                self.margin_hike_active = True
-                print("[Exchange] CRITICAL: COMEX raised margin requirements! Forced liquidation triggered!")
-        
+                print("[Exchange] COMEX raised margin requirements! Forced liquidation triggered!")
+            self.margin_hike_active = True
+            self.days_since_hike = 1  # Start cooldown timer
+
         if self.margin_hike_active:
             self.days_since_hike += 1
-            if self.days_since_hike > 10:
-                self.margin_hike_active = False
-                self.days_since_hike = 0
-            return -50.0 # Dump 50 Moz paper equivalent DAILY to crush the momentum
-            
+            # Paper liquidation: proportional to how extreme the run was (2-4 Moz/day)
+            liquidation = min(4.0, max(2.0, ten_day_return * 15.0)) / TRADING_DAYS
+            return -liquidation
+
         return 0.0
 
 class BullionBankShorts:
@@ -722,10 +806,9 @@ class BullionBankShorts:
             self.risk_tolerance = min(100.0, self.risk_tolerance + 2.0)
             
         if self.risk_tolerance < 20.0:
-            # Panic Cover
-            # FIX #2: Fast liquidation (up to 50 Moz/day) instead of slow trickle
-            cover_panic = min(self.short_position, 50.0) 
-            # BUG FIX 2: short_position floored at 0 — cannot go negative
+            # Realistic panic cover: 5 Moz/day max
+            # Large institutions cover slowly to avoid moving market against themselves
+            cover_panic = min(self.short_position, 5.0)
             self.short_position = max(0.0, self.short_position - cover_panic)
             return cover_panic 
             
@@ -799,7 +882,7 @@ class GSR_Gravity:
         
     def process_day(self, silver_price, macro):
         # AI Logic: GSR gravity gets stronger if liquidity is tight
-        current_gsr = macro.gold_price / silver_price
+        current_gsr = macro.gold_price / max(0.01, silver_price)
         
         if macro.fed_funds_rate > 5.0: self.liquidity_momentum = 1.05 # Tight liquidity hurts silver
         else: self.liquidity_momentum = 0.95 # Loose liquidity helps silver outpace gold

@@ -9,6 +9,7 @@ from collections import defaultdict
 from config import SimConfig, HISTORICAL_1990_STATE, FUTURE_2026_STATE, SCENARIOS_OVERRIDE
 from logger import log_event
 from engine import run_simulation_core
+from realworld import fetch_live_market_data
 
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 OUTPUT_DIR = os.path.join(ROOT_DIR, 'outputs')
@@ -233,12 +234,24 @@ if __name__ == "__main__":
     parser.add_argument('--no-solar-sub', action='store_true')
     parser.add_argument('--no-energy-crisis', action='store_true')
     parser.add_argument('--no-retail-cap', action='store_true')
+    parser.add_argument('--live', action='store_true', help='Fetch live real-world data and override starting conditions')
     args = parser.parse_args()
     
     # FIX #5 (Competitor): Load external YAML config if provided
     if args.config:
         FUTURE_2026_STATE = SimConfig.from_yaml(args.config)
         print(f"[Config] Loaded scenario from: {args.config}")
+        
+    if args.live:
+        print("[Live Data] Fetching current real-world market metrics...")
+        live_data = fetch_live_market_data()
+        if live_data.get("success"):
+            print(f"[Live Data] Success: Silver ${live_data['silver_price']:.2f}, Gold ${live_data['gold_price']:.2f}, Fed Rate {live_data['fed_rate_proxy']:.2f}%")
+            FUTURE_2026_STATE.start_silver_price = live_data['silver_price']
+            FUTURE_2026_STATE.start_gold_price = live_data['gold_price']
+            FUTURE_2026_STATE.fed_rate = live_data['fed_rate_proxy']
+        else:
+            print(f"[Live Data] Failed to fetch data: {live_data.get('error')}. Using defaults.")
     
     SCENARIOS_OVERRIDE["no_strikes"] = args.no_strikes
     SCENARIOS_OVERRIDE["no_whales"] = args.no_whales

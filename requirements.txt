@@ -1,7 +1,9 @@
 pytest
 hypothesis
 yfinance
+pandas
 
 fastapi
 uvicorn
 pyyaml
+httpx

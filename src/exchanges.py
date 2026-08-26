@@ -9,11 +9,11 @@ class COMEX_Exchange:
         self.defaulted = False
         self.force_majeure_active = False
         
-    def move_eligible_to_registered(self, amount, price):
-        if price > 50.0 and self.eligible_float > amount:
+    def move_eligible_to_registered(self, amount, current_price, threshold_price):
+        if current_price > threshold_price and self.eligible_float > amount:
             self.eligible_float -= amount
             self.vault_float += amount
-            log_event("Exchange", "Eligible metal moved to Registered", amount=amount, price=price)
+            log_event("Exchange", "Eligible metal moved to Registered", amount=amount, price=current_price)
             return True
         return False
 
@@ -25,13 +25,16 @@ class LBMA_Exchange:
         self.bank_run_active = False
         
     def check_bank_run(self, price, geo_tension):
-        if not self.bank_run_active and (price > 40.0 or geo_tension > 80):
-            if random.random() < (0.05 / TRADING_DAYS):
+        # Bank run only triggered during true panic: price > $120 (extreme) or geo_tension > 90
+        # Real LBMA has never defaulted — this should be extremely rare
+        if not self.bank_run_active and (price > 120.0 or geo_tension > 90):
+            if random.random() < (0.02 / TRADING_DAYS):  # ~2% annual chance during extreme stress
                 self.bank_run_active = True
                 log_event("Exchange", "Bank run on LBMA unallocated!")
         
         if self.bank_run_active:
-            drain = min(self.vault_float, 20.0) 
+            # Realistic: 5 Moz/day (not 20) — large but physically possible daily withdrawal
+            drain = min(self.vault_float, 5.0)
             self.vault_float -= drain
             self.unallocated_claims = max(0.0, self.unallocated_claims - drain)
             return drain

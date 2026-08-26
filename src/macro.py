@@ -56,6 +56,8 @@ class MacroEnvironment:
         self.supply_chain_blockade = False
         self.brics_vault_drain_daily = 0
         self.gold_price = gold_price
+        self.global_scrap_pool = 1500.0  # Above-ground jewelry/silverware
+        self.global_ewaste_pool = 500.0  # Above-ground tech/solar
         
         self.current_year = start_year
         self.current_day = 0
@@ -89,23 +91,41 @@ class MacroEnvironment:
             
         dt = 1.0 / TRADING_DAYS
         
-        Z1 = random.gauss(0,1)
-        Z2 = random.gauss(0,1)
-        Z3 = random.gauss(0,1)
-        
-        dW_dxy = Z1
-        dW_metal = -0.3 * Z1 + 0.9539 * Z2  
-        dW_geo = 0.4 * Z1 + 0.1 * Z2 + 0.911 * Z3
+        # Proper Cholesky Decomposition for correlated assets
+        # Order: DXY, Metal (Copper), Geo, Gold
+        try:
+            import numpy as np
+            corr_matrix = np.array([
+                [ 1.0,  -0.2,   0.2,  -0.3 ],  # DXY
+                [-0.2,   1.0,   0.1,   0.2 ],  # Metal
+                [ 0.2,   0.1,   1.0,   0.3 ],  # Geo
+                [-0.3,   0.2,   0.3,   1.0 ]   # Gold
+            ])
+            L = np.linalg.cholesky(corr_matrix)
+            Z = np.array([random.gauss(0,1) for _ in range(4)])
+            correlated_Z = L.dot(Z)
+            dW_dxy, dW_metal, dW_geo, dW_gold = correlated_Z
+        except ImportError:
+            # Fallback
+            Z1, Z2, Z3, Z4 = random.gauss(0,1), random.gauss(0,1), random.gauss(0,1), random.gauss(0,1)
+            dW_dxy = Z1
+            dW_metal = -0.3 * Z1 + 0.9539 * Z2  
+            dW_geo = 0.4 * Z1 + 0.1 * Z2 + 0.911 * Z3
+            dW_gold = -0.5 * Z1 + 0.2 * Z2 + 0.6 * Z3 + 0.583 * Z4
         
         self.dxy_strength *= math.exp(-0.5 * 0.05**2 * dt + 0.05 * math.sqrt(dt) * dW_dxy)
         self.base_metal_cycle = max(0.6, min(1.4, self.base_metal_cycle * math.exp(-0.5 * 0.1**2 * dt + 0.1 * math.sqrt(dt) * dW_metal)))
         
+        # Jacobi-style repelling boundaries for Geopolitical tension (bounds: 10 to 100)
         geo_theta = 0.5  
-        self.geopolitical_tension_index += geo_theta * (50.0 - self.geopolitical_tension_index) * dt + 15 * math.sqrt(dt) * dW_geo
+        # As it gets close to 100, the volatility dampens to 0, naturally repelling it
+        vol_geo = 15.0 * math.sqrt(max(0, (self.geopolitical_tension_index - 10.0) * (100.0 - self.geopolitical_tension_index))) / 45.0
+        self.geopolitical_tension_index += geo_theta * (50.0 - self.geopolitical_tension_index) * dt + vol_geo * math.sqrt(dt) * dW_geo
+        # Failsafe clamp just in case of massive discrete jump
         self.geopolitical_tension_index = max(10.0, min(100.0, self.geopolitical_tension_index))
         
         gold_drift = 0.03 + (self.m2_inflation_index - 1.0) * 0.02
-        self.gold_price *= math.exp((gold_drift - 0.5 * 0.15**2) * dt + 0.15 * math.sqrt(dt) * random.gauss(0,1))
+        self.gold_price *= math.exp((gold_drift - 0.5 * 0.15**2) * dt + 0.15 * math.sqrt(dt) * dW_gold)
         
         if self.global_gdp_growth < 0:
             self.copper_price_index *= math.exp(-0.5 * 0.3**2 * dt - 0.1*dt + 0.3 * math.sqrt(dt) * random.gauss(0,1))
@@ -115,7 +135,15 @@ class MacroEnvironment:
         oil_drift = 0.02
         if self.geopolitical_tension_index > 75: oil_drift = 0.20
         elif self.global_gdp_growth < -0.01: oil_drift = -0.20
-        self.oil_price = max(40.0, min(200.0, self.oil_price * math.exp((oil_drift - 0.5 * 0.25**2) * dt + 0.25 * math.sqrt(dt) * random.gauss(0,1))))
+        
+        # CIR process for Oil Price (mean-reverting to bounds instead of hard clipping)
+        oil_vol = 0.25 * math.sqrt(self.oil_price)
+        oil_mean = 75.0
+        if oil_drift > 0: oil_mean = 150.0
+        elif oil_drift < 0: oil_mean = 50.0
+        
+        self.oil_price += 0.5 * (oil_mean - self.oil_price) * dt + oil_vol * math.sqrt(dt) * random.gauss(0,1)
+        self.oil_price = max(10.0, self.oil_price) # Failsafe floor
         
         self.m2_inflation_index *= math.exp(0.03 * dt)
         self.tech_deflation_index *= math.exp(-0.02 * dt)

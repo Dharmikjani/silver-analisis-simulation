@@ -101,37 +101,46 @@ class SimulationEngine:
         self.comex = COMEX_Exchange(initial_float=c.vaults.comex_eligible)
         self.lbma = LBMA_Exchange(vault_start=c.vaults.lbma_vault, unallocated_start=c.vaults.lbma_unallocated)
         self.india_vault = India_IIBX_Vault(capacity=c.vaults.india_capacity, inventory_start=c.vaults.india_inventory)
+        
+        self.dynamic_supply_add = 0.0
+        self.comex_demand_add = 0.0
 
     def run(self, return_full=False):
         for day in range(self.total_sim_days):
-            self.macro.simulate_day()
+            try:
+                self.macro.simulate_day()
+                
+                # Track macro events for stats
+                if getattr(self.macro, 'ai_bubble_burst', False): self.stats["ai_bubble_burst_count"] = 1
+                if getattr(self.macro, 'retail_capitulation', False): self.stats["retail_cap_count"] = 1
+                if self.macro.mining_strike_active: self.stats["mining_strike_count"] = 1
+                if self.macro.refinery_energy_crisis: self.stats["energy_crisis_count"] = 1
+                if self.demand_solar.substitution_triggered: self.stats["substitution_trigger_count"] = 1
+                if getattr(self.macro, 'cbdc_launched', False): self.stats["cbdc_count"] = 1
+                
+                total_supply = self._process_supply()
+                lbma_demand, comex_demand = self._process_demand(total_supply)
+                
+                # EXTREME INVARIANT CHECK: No negative supply or NaN allowed
+                assert total_supply >= 0, f"BUG: Negative supply generated: {total_supply}"
+                assert not math.isnan(total_supply) and not math.isnan(lbma_demand)
+                
+                self._process_efp_and_emergencies(day, comex_demand)
+                self._update_price(lbma_demand, comex_demand, total_supply)
+                
+                assert self.physical_price > 0, f"BUG: Price dropped to {self.physical_price}"
+                assert not math.isnan(self.physical_price), "BUG: Price became NaN!"
+                
+                self._update_exchanges_and_stats(day, lbma_demand, comex_demand, total_supply)
+                
+                # VAULT INVARIANT CHECKS
+                assert self.comex.vault_float >= 0, "BUG: COMEX float dropped below zero!"
+                assert self.lbma.vault_float >= 0, "BUG: LBMA float dropped below zero!"
             
-            # Track macro events for stats
-            if getattr(self.macro, 'ai_bubble_burst', False): self.stats["ai_bubble_burst_count"] = 1
-            if getattr(self.macro, 'retail_capitulation', False): self.stats["retail_cap_count"] = 1
-            if self.macro.mining_strike_active: self.stats["mining_strike_count"] = 1
-            if self.macro.refinery_energy_crisis: self.stats["energy_crisis_count"] = 1
-            if self.demand_solar.substitution_triggered: self.stats["substitution_trigger_count"] = 1
-            if getattr(self.macro, 'cbdc_launched', False): self.stats["cbdc_count"] = 1
-            
-            total_supply = self._process_supply()
-            lbma_demand, comex_demand = self._process_demand(total_supply)
-            
-            # EXTREME INVARIANT CHECK: No negative supply or NaN allowed
-            assert total_supply >= 0, f"BUG: Negative supply generated: {total_supply}"
-            assert not math.isnan(total_supply) and not math.isnan(lbma_demand)
-            
-            self._process_efp_and_emergencies(day, comex_demand)
-            self._update_price(lbma_demand, comex_demand, total_supply)
-            
-            assert self.physical_price > 0, f"BUG: Price dropped to {self.physical_price}"
-            assert not math.isnan(self.physical_price), "BUG: Price became NaN!"
-            
-            self._update_exchanges_and_stats(day, lbma_demand, comex_demand, total_supply)
-            
-            # VAULT INVARIANT CHECKS
-            assert self.comex.vault_float >= 0, "BUG: COMEX float dropped below zero!"
-            assert self.lbma.vault_float >= 0, "BUG: LBMA float dropped below zero!"
+            except Exception as e:
+                self.stats["errors"] += 1
+                print(f"[Engine] Fatal error on day {day}: {e}")
+                break
             
         self.stats["end_price"] = self.physical_price
         self.stats["end_paper_price"] = self.paper_price

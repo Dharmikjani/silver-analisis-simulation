@@ -1,5 +1,5 @@
 import random
-from dataclasses import dataclass, fields
+from dataclasses import dataclass, field, fields
 
 TRADING_DAYS = 252
 TOTAL_YEARS = 10
@@ -17,36 +17,36 @@ SCENARIOS_OVERRIDE = {
 
 @dataclass
 class Thresholds:
-    retail_melt_multiplier: float
-    jpm_dump_multiplier: float
-    solar_substitution_multiplier: float
-    hoarder_dump_multiplier: float
-    china_stop_buying_multiplier: float
-    prob_brics_announce: float
-    prob_cbdc_launch: float
-    prob_mining_strike: float
-    prob_retail_capitulation: float
-    prob_energy_crisis: float
-    prob_predatory_squeeze: float
+    retail_melt_multiplier: float = 2.0
+    jpm_dump_multiplier: float = 3.33
+    solar_substitution_multiplier: float = 6.66
+    hoarder_dump_multiplier: float = 5.0
+    china_stop_buying_multiplier: float = 10.0
+    prob_brics_announce: float = 0.05
+    prob_cbdc_launch: float = 0.05
+    prob_mining_strike: float = 0.10
+    prob_retail_capitulation: float = 0.05
+    prob_energy_crisis: float = 0.05
+    prob_predatory_squeeze: float = 0.20
 
 @dataclass
 class Capacities:
-    smelter_max_annual: float
-    ai_tech_max_annual: float
-    india_trade_deficit_limit: float
+    smelter_max_annual: float = 500.0
+    ai_tech_max_annual: float = 800.0
+    india_trade_deficit_limit: float = 500.0
 
 @dataclass
 class VaultStarts:
-    lbma_vault: float
-    lbma_unallocated: float
-    comex_eligible: float
-    india_capacity: float
-    india_inventory: float
-    jpm_house: float
-    billionaire_vault: float
-    retail_mattress: float
-    etf_holdings: float
-    deep_hoarders: float
+    lbma_vault: float = 300.0
+    lbma_unallocated: float = 1000.0
+    comex_eligible: float = 200.0
+    india_capacity: float = 145.0
+    india_inventory: float = 70.0
+    jpm_house: float = 350.0
+    billionaire_vault: float = 400.0
+    retail_mattress: float = 2000.0
+    etf_holdings: float = 1270.0
+    deep_hoarders: float = 2500.0
 
 @dataclass
 class SimConfig:
@@ -71,9 +71,9 @@ class SimConfig:
     other_demand: float
     retail: float
     
-    thresholds: Thresholds
-    capacities: Capacities
-    vaults: VaultStarts
+    thresholds: Thresholds = field(default_factory=Thresholds)
+    capacities: Capacities = field(default_factory=Capacities)
+    vaults: VaultStarts = field(default_factory=VaultStarts)
 
     def apply_jitter(self, jitter_pct: float = 0.10):
         """Apply random ±jitter_pct perturbation to all numeric fields."""
@@ -101,10 +101,18 @@ class SimConfig:
                 
             if 'thresholds' in data and isinstance(data['thresholds'], dict):
                 data['thresholds'] = Thresholds(**data['thresholds'])
+            else:
+                data.pop('thresholds', None) # Force default factory to kick in
+                
             if 'capacities' in data and isinstance(data['capacities'], dict):
                 data['capacities'] = Capacities(**data['capacities'])
+            else:
+                data.pop('capacities', None)
+                
             if 'vaults' in data and isinstance(data['vaults'], dict):
                 data['vaults'] = VaultStarts(**data['vaults'])
+            else:
+                data.pop('vaults', None)
                 
             return cls(**data)
         except ImportError:

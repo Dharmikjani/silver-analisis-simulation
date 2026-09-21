@@ -35,7 +35,8 @@ class SimulationEngine:
             fed_rate=self.oracle.fed_rate, 
             dxy=self.oracle.dxy, 
             copper=self.oracle.copper, 
-            start_year=self.config.start_year
+            start_year=self.config.start_year,
+            start_day=155  # DEF-16 Fix: Synchronize macro calendar with actual_day = day + 155
         )
         
         self._init_stakeholders()
@@ -52,6 +53,8 @@ class SimulationEngine:
         self.dt = 1.0 / TRADING_DAYS
         
         self.stats = defaultdict(int)
+        # DEF-08 Fix: Explicitly initialize min_price to avoid defaultdict(int) autovivifying 0
+        self.stats["min_price"] = self.oracle.silver_price
         self.daily_data = []
         self.ACTIVE_DELIVERY_MONTHS = {3, 5, 7, 9, 12}
         
@@ -238,18 +241,20 @@ class SimulationEngine:
         sge_drain = self.sge_arb.process_drain(self.lbma.vault_float, self.physical_price, self.macro)
         if self.gov_usa.export_ban_active: sge_drain = 0.0
         
-        whale_acc = 0.0 if SCENARIOS_OVERRIDE["no_whales"] else self.whale_syndicate.process_accumulation(self.lbma.vault_float, self.bullion_bank_shorts.short_position)
+        # DEF-13 Fix: Pass comex.vault_float to process_accumulation (matches signature comex_float)
+        whale_acc = 0.0 if SCENARIOS_OVERRIDE["no_whales"] else self.whale_syndicate.process_accumulation(self.comex.vault_float, self.bullion_bank_shorts.short_position)
         if whale_acc > 0: self.stats["whale_buy_count"] += 1
         
         hedge_fund_squeeze = self.predatory_hedge_fund.process_attack(self.comex.vault_float, self.physical_price, self.macro)
         if self.predatory_hedge_fund.is_squeezing: self.stats["predatory_attack_count"] += 1
         
-        current_gsr = self.oracle.gold_price / self.physical_price if self.physical_price > 0 else 80.0
+        # DEF-03 Fix: Use dynamic macroeconomic gold price instead of static Day-0 oracle price
+        current_gsr = self.macro.gold_price / self.physical_price if self.physical_price > 0 else 80.0
         bill_flow = self.billionaire_syndicate.process_day(self.physical_price, self.macro, current_gsr)
         if self.billionaire_syndicate.is_buying: self.stats["billionaire_raid_count"] += 1
         
+        # DEF-15 Fix: Assign dynamic_supply_add cleanly without unpropagated local total_supply mutation
         if bill_flow < 0:
-            total_supply += abs(bill_flow) # Need to propagate this up or just handle it here
             self.dynamic_supply_add = abs(bill_flow)
             bill_flow = 0.0
         else:
@@ -272,11 +277,18 @@ class SimulationEngine:
         opt_hedge = self.options_mm.process_delta_hedge(retail_daily, price_mom)
         margin_liquidation = self.exchange_margins.process_day(price_mom, self.options_mm.implied_volatility)
         
-        if getattr(self.comex, 'margin_hike_active', False) and self.comex.force_majeure_active:
+        # DEF-02 Fix: Query exchange_margins.margin_hike_active (not comex)
+        if self.exchange_margins.margin_hike_active and self.comex.force_majeure_active:
             retail_daily *= 0.10
             opt_hedge *= 0.10
             
         gsr_demand = self.gsr_gravity.process_day(self.physical_price, self.macro)
+        
+        # DEF-12 Fix: Activate London unallocated account holders bank run check
+        bank_run_drain = 0.0
+        if self.unallocated_holders.check_bank_run(self.lbma.vault_float):
+            bank_run_drain = min(self.lbma.vault_float, 5.0)
+            self.stats["bank_run_count"] = self.stats.get("bank_run_count", 0) + 1
         
         if hasattr(self, 'trace_data'):
             self.trace_data.update({
@@ -297,7 +309,7 @@ class SimulationEngine:
             
         lbma_demand = (base_demand + (retail_daily * 0.5) + china_daily + lbma_drain_iibx + 
                        sge_drain + self.macro.brics_vault_drain_daily + whale_acc + cb_acc + 
-                       hoarder_acc + bill_flow + max(0, etf_flow) + gsr_demand)
+                       hoarder_acc + bill_flow + max(0, etf_flow) + gsr_demand + bank_run_drain)
                        
         if self.physical_price > 100.0:
             elasticity_coeff = 1.5
@@ -307,8 +319,11 @@ class SimulationEngine:
             lbma_demand -= retail_jewelry_portion
             lbma_demand += (retail_jewelry_portion * destruction_factor)
             
-        comex_physical_demand = (retail_daily * 0.1) + hedge_fund_squeeze + usa_dpa + (bank_panic_cover * 0.20)
-        comex_paper_demand = (retail_daily * 0.4) + opt_hedge + margin_liquidation + (bank_panic_cover * 0.80)
+        # DEF-11 Fix: Route hedge fund squeeze buying to physical demand, and futures cash-out dump to paper demand
+        hf_physical = max(0.0, hedge_fund_squeeze)
+        hf_paper = min(0.0, hedge_fund_squeeze)
+        comex_physical_demand = (retail_daily * 0.1) + hf_physical + usa_dpa + (bank_panic_cover * 0.20)
+        comex_paper_demand = (retail_daily * 0.4) + hf_paper + opt_hedge + margin_liquidation + (bank_panic_cover * 0.80)
         
         # COMEX demand passed to _update_exchanges_and_stats is PHYSICAL drain
         comex_demand = comex_physical_demand
@@ -381,21 +396,9 @@ class SimulationEngine:
             jump_size = random.gauss(jump_mean, jump_std)
             jump_mult = math.exp(jump_size)
             
-        gbm_mult = math.exp((drift - 0.5 * self.current_sigma**2) * self.dt + self.current_sigma * math.sqrt(self.dt) * random.gauss(0,1)) * jump_mult
-        
         circuit_breaker_limit = 1.07
         if total_vaults < 10.0:
             circuit_breaker_limit = 3.00 # 300% daily move allowed during extinction
-            
-        if gbm_mult > circuit_breaker_limit:
-            self.stats["circuit_breaker_count"] += 1
-            gbm_mult = circuit_breaker_limit
-        elif gbm_mult < 0.93:
-            self.stats["circuit_breaker_count"] += 1
-            gbm_mult = 0.93
-            
-        if gbm_mult > 1.10:
-            self.stats["high_price_spikes_count"] += 1
         
         # ===================================================================
         # DUAL-PRICE SYSTEM: Paper GBM + Physical Premium
@@ -414,7 +417,19 @@ class SimulationEngine:
             paper_drift = drift * 0.02
             paper_sigma = self.current_sigma * 0.05
         
-        paper_gbm = math.exp((paper_drift - 0.5 * paper_sigma**2) * self.dt + paper_sigma * math.sqrt(self.dt) * random.gauss(0,1))
+        # DEF-10 Fix: Apply Merton jump-diffusion multiplier directly to paper_gbm
+        paper_gbm = math.exp((paper_drift - 0.5 * paper_sigma**2) * self.dt + paper_sigma * math.sqrt(self.dt) * random.gauss(0,1)) * jump_mult
+        
+        # Apply exchange circuit breakers to paper price moves
+        if paper_gbm > circuit_breaker_limit:
+            self.stats["circuit_breaker_count"] += 1
+            paper_gbm = circuit_breaker_limit
+        elif paper_gbm < (1.0 / circuit_breaker_limit if total_vaults < 10.0 else 0.93):
+            self.stats["circuit_breaker_count"] += 1
+            paper_gbm = 1.0 / circuit_breaker_limit if total_vaults < 10.0 else 0.93
+            
+        if paper_gbm > 1.10:
+            self.stats["high_price_spikes_count"] += 1
         
         if not getattr(self.comex, 'defaulted', False):
             self.paper_price = max(0.10, self.paper_price * paper_gbm)
@@ -518,6 +533,8 @@ class SimulationEngine:
             if not self.lbma.defaulted:
                 self.lbma.defaulted = True
                 self.stats["lbma_default_count"] += 1
+                # DEF-14 Fix: Ensure physical premium elevates permanently (>= 100%) upon exchange failure
+                self.physical_premium = max(self.physical_premium, 1.0)
                 self.physical_price *= 2.0
         else:
             if lbma_deficit < 0:
@@ -548,6 +565,8 @@ class SimulationEngine:
             "day_of_month": (actual_day % 21) + 1,
             "avg_physical": self.physical_price,
             "avg_paper": self.paper_price,
+            "gold_price": self.macro.gold_price,
+            "gold_silver_ratio": self.macro.gold_price / max(0.01, self.physical_price),
             "supply": total_supply,
             # demand = true physical + paper demand (EXCLUDES margin_liquidation which is paper supply, not demand)
             "demand": lbma_demand + max(0, comex_demand),

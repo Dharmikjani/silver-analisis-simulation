@@ -6,9 +6,9 @@ from logger import log_event
 
 class LiveDataOracle:
     def __init__(self, mode="future", config=FUTURE_2026_STATE):
-        self.silver_price = config.start_silver_price
-        self.gold_price = config.start_gold_price
-        self.fed_rate = config.fed_rate
+        self.silver_price = config.start_silver_price if config.start_silver_price > 0.0 else 67.0
+        self.gold_price = config.start_gold_price if config.start_gold_price > 0.0 else 4350.0
+        self.fed_rate = config.fed_rate if config.fed_rate > 0.0 else 4.50
         self.dxy = 100.0
         self.copper = 4.0
         
@@ -33,21 +33,28 @@ class LiveDataOracle:
                 if not hist.empty:
                     data[name] = float(hist["Close"].iloc[-1])
             
-            if "Silver" in data: self.silver_price = data["Silver"]
+            if "Silver" in data and data["Silver"] > 0: self.silver_price = data["Silver"]
             if "Gold" in data and data["Gold"] > 0: self.gold_price = data["Gold"]
             if "DXY" in data and data["DXY"] > 0: self.dxy = data["DXY"]
-            if "FedRate" in data: self.fed_rate = data["FedRate"]
+            if "FedRate" in data and data["FedRate"] > 0: self.fed_rate = data["FedRate"]
             if "Copper" in data and data["Copper"] > 0: self.copper = data["Copper"]
+            
+            # DEF-09 Fix: Guarantee non-zero fallbacks when yfinance returns empty history
+            if self.silver_price <= 0.0: self.silver_price = 67.0
+            if self.gold_price <= 0.0: self.gold_price = 4350.0
+            if self.fed_rate <= 0.0: self.fed_rate = 4.50
+            if self.copper <= 0.0: self.copper = 4.0
+            
             log_event("LiveDataOracle", "Loaded live data", silver=self.silver_price, gold=self.gold_price, dxy=self.dxy, fed_rate=self.fed_rate, copper=self.copper)
             print(f"[LiveDataOracle] Loaded | Silver: ${self.silver_price:.2f} | Gold: ${self.gold_price:.2f} | DXY: {self.dxy:.2f} | Fed: {self.fed_rate:.2f}% | Copper: ${self.copper:.2f}")
             
         except Exception as e:
             print(f"[LiveDataOracle] API Error: {e}. Using defaults.")
-            self.silver_price = 30.0
-            self.gold_price = 2500.0
+            self.silver_price = 67.0
+            self.gold_price = 4350.0
 
 class MacroEnvironment:
-    def __init__(self, config=None, gold_price=2500.0, fed_rate=5.0, dxy=100.0, copper=4.0, start_year=2026):
+    def __init__(self, config=None, gold_price=4350.0, fed_rate=5.0, dxy=100.0, copper=4.0, start_year=2026, start_day=0):
         self.config = config
         self.dxy_strength = dxy
         self.fed_funds_rate = fed_rate
@@ -60,7 +67,7 @@ class MacroEnvironment:
         self.global_ewaste_pool = 500.0  # Above-ground tech/solar
         
         self.current_year = start_year
-        self.current_day = 0
+        self.current_day = start_day
         
         self.copper_price_index = copper / 4.0
         self.base_metal_cycle = 1.0  
@@ -155,7 +162,8 @@ class MacroEnvironment:
         if not self.brics_announced and self.config and random.random() < (self.config.thresholds.prob_brics_announce / TRADING_DAYS):
             self.brics_announced = True
             log_event("Macro", "BRICS Gold-Reserve Announcement", gold_price=self.gold_price)
-            self.brics_vault_drain_daily = 0
+            # DEF-05 Fix: Assign realistic sovereign physical vault drain (20 Moz/year)
+            self.brics_vault_drain_daily = 20.0 / TRADING_DAYS
             self.gold_price *= random.uniform(1.05, 1.15) 
             
         if self.dxy_strength > 105 and self.global_gdp_growth < 0:
@@ -168,11 +176,13 @@ class MacroEnvironment:
         else:
             self.defense_stockpile_active = False
             
+        # DEF-07 Fix: Decouple export ban check from BRICS check
         if self.geopolitical_tension_index > 75:
             if random.random() < (0.10 / TRADING_DAYS):
                 self.export_ban_active = True
-        elif self.brics_announced:
-            self.brics_vault_drain_daily = 0
+                
+        if self.brics_announced:
+            self.brics_vault_drain_daily = 20.0 / TRADING_DAYS
             
         if self.geopolitical_tension_index > 85:
             if not self.supply_chain_blockade:

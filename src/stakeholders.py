@@ -929,8 +929,9 @@ class Billionaire_Family_Offices:
         # Buy during extreme geopolitical tension
         if macro.geopolitical_tension_index > 80:
             self.is_buying = True
-            net_flow = 2.0 # Drain 2 Moz/day
-            self.vault_float += net_flow
+            buy_amt = 2.0 # Drain 2 Moz/day
+            self.vault_float += buy_amt
+            net_flow += buy_amt
         else:
             self.is_buying = False
             
@@ -939,7 +940,7 @@ class Billionaire_Family_Offices:
             self.is_selling = True
             sell_amount = min(3.0, self.vault_float) # Supply 3 Moz/day
             self.vault_float -= sell_amount
-            net_flow = -sell_amount
+            net_flow -= sell_amount
         else:
             self.is_selling = False
             

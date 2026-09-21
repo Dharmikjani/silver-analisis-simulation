@@ -74,7 +74,7 @@ def simulate() -> Dict[str, Dict[str, Any]]:
 @app.get("/api/live")
 def live_market_data() -> Dict[str, Any]:
     """Fetch real-world live market data."""
-    return fetch_live_market_data()
+    return fetch_live_market_data(use_cache=True)
 
 # Mount static files (css, js)
 app.mount("/", StaticFiles(directory=WEB_DIR, html=True), name="static")

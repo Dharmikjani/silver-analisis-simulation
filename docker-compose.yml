@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  silver-engine-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: silver_analisis_api
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      # Optional: set live API keys if desired
+      # - METALPRICE_API_KEY=${METALPRICE_API_KEY}
+      # - ALPHAVANTAGE_API_KEY=${ALPHAVANTAGE_API_KEY}
+    restart: unless-stopped
+    volumes:
+      - ./outputs:/app/outputs

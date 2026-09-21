@@ -1,0 +1,193 @@
+name: CI/CD Pipeline - ISO 29119 Quality, Verification & Deployment
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+    inputs:
+      run_full_simulation:
+        description: 'Run Extended 5-Year Simulation during CD packaging'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  # ============================================================================
+  # STAGE 1: Code Quality, Style & Static Analysis
+  # ============================================================================
+  code-quality:
+    name: Code Quality & Static Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 radon
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Flake8 Syntax & Critical Error Audit
+        run: |
+          # Stop the build if there are Python syntax errors or undefined names
+          python -m flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+
+      - name: Radon Cyclomatic Complexity Profile
+        run: |
+          echo "=== Radon Complexity Audit (ISO/IEC/IEEE 29119-4 Clause 7.4) ==="
+          python -m radon cc src/ -s -a
+
+  # ============================================================================
+  # STAGE 2: Multi-Platform Test Matrix (Windows + Linux | Python 3.11, 3.12, 3.13)
+  # ============================================================================
+  test-matrix:
+    name: Test Matrix (${{ matrix.os }} | Python ${{ matrix.python-version }})
+    needs: code-quality
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ["3.11", "3.12", "3.13"]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run ISTQB 16-Defect Resolution Confirmation
+        run: |
+          python "QA whitebox/verify_defect_fixes.py"
+
+      - name: Run ISO/IEC/IEEE 29119-4 White-Box Testing Suite (100% Coverage Gate)
+        run: |
+          python "QA whitebox/run_whitebox_suite.py"
+
+      - name: Run End-to-End FastAPI Integration Tests
+        run: |
+          python -m pytest tests/test_api_e2e.py -v
+
+      - name: Upload ISO 29119-3 Test Summary Report
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ISO-29119-Test-Summary-Report
+          path: "QA whitebox/docs/ISO_29119_4_TEST_SUMMARY_REPORT.md"
+          retention-days: 30
+
+      - name: Upload Coverage Artifacts
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
+        uses: actions/upload-artifact@v4
+        with:
+          name: Code-Coverage-Report
+          path: "QA whitebox/coverage_whitebox.json"
+          retention-days: 30
+
+  # ============================================================================
+  # STAGE 3: Simulation Engine Smoke & Stability Test
+  # ============================================================================
+  simulation-smoke-test:
+    name: Quant Simulation Smoke Test
+    needs: test-matrix
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Execute 1-Year Multi-Scenario Simulation Run
+        run: |
+          python scripts/silver_mega_simulator.py --years 1 --iter 2
+          python -c "import os; assert os.path.exists('outputs/ultimate_simulation_path_base.csv'); assert os.path.exists('outputs/simulation_stats_base.json')"
+          echo "Simulation Smoke Test: Output paths and statistics generated successfully."
+
+  # ============================================================================
+  # STAGE 4: Security & Static Vulnerability Scan
+  # ============================================================================
+  security-audit:
+    name: Security & Vulnerability Scan
+    needs: code-quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run Bandit AST Security Audit
+        run: |
+          pip install bandit
+          python -m bandit -r src/ -ll -ii || true
+
+  # ============================================================================
+  # STAGE 5: Continuous Delivery (CD) - Container Build & Release Packaging
+  # ============================================================================
+  build-and-package:
+    name: Build & Package Release Artifacts
+    needs: [test-matrix, simulation-smoke-test]
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          tags: silver-analisis-api:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Package Deployment Bundle
+        run: |
+          mkdir -p release_bundle
+          cp -r src api web outputs scripts requirements.txt Dockerfile docker-compose.yml release_bundle/
+          tar -czvf silver-analisis-deployment-bundle.tar.gz -C release_bundle .
+
+      - name: Upload Deployment Bundle Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Silver-Analisis-Deployment-Bundle
+          path: silver-analisis-deployment-bundle.tar.gz
+          retention-days: 14

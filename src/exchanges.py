@@ -10,7 +10,8 @@ class COMEX_Exchange:
         self.force_majeure_active = False
         
     def move_eligible_to_registered(self, amount, current_price, threshold_price):
-        if current_price > threshold_price and self.eligible_float > amount:
+        # DEF-06 Fix: Inclusive comparison (>=) allows moving the entire eligible float
+        if current_price > threshold_price and self.eligible_float >= amount:
             self.eligible_float -= amount
             self.vault_float += amount
             log_event("Exchange", "Eligible metal moved to Registered", amount=amount, price=current_price)

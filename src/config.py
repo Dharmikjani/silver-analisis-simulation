@@ -171,7 +171,7 @@ HISTORICAL_1990_STATE = SimConfig(
 )
 
 FUTURE_2026_STATE = SimConfig(
-    start_year=2026, start_silver_price=0.0, start_gold_price=0.0, comex_float=415.0,
+    start_year=2026, start_silver_price=67.0, start_gold_price=4350.0, comex_float=415.0,
     fed_rate=5.0, primary_mine=232.0, byproduct_mine=610.0, scrap_refiners=150.0, ewaste=40.0,
     solar_pv=151.0, ev_auto=100.0, defense=40.0, ai_tech=80.0, jewelry=200.0, other_demand=280.0, retail=250.0,
     thresholds=DEFAULT_THRESHOLDS, capacities=DEFAULT_CAPACITIES, vaults=DEFAULT_VAULTS

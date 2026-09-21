@@ -1,9 +1,12 @@
-pytest
-hypothesis
-yfinance
-pandas
-
 fastapi
 uvicorn
 pyyaml
 httpx
+requests
+pytest
+hypothesis
+pytest-cov
+radon
+yfinance
+pandas
+

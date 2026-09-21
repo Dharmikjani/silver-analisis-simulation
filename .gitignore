@@ -1,7 +1,15 @@
 __pycache__/
 *.pyc
+*.pyo
 .pytest_cache/
 .coverage
+.coverage.*
 .hypothesis/
-outputs/
+test_simulation.log/
+*.log
+*.jsonl
+outputs/run_log.txt
+outputs/live_market_cache.json
 .env
+release_bundle/
+*.tar.gz

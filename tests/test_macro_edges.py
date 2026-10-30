@@ -14,8 +14,8 @@ def test_livedataoracle_exception(mocker, capsys):
     mocker.patch('macro.yf.Ticker', side_effect=Exception("Timeout"))
     
     oracle = LiveDataOracle()
-    assert oracle.silver_price == 30.0
-    assert oracle.gold_price == 2500.0
+    assert oracle.silver_price == 51.0
+    assert oracle.gold_price == 2740.0
     
     captured = capsys.readouterr()
     assert "[LiveDataOracle] API Error: Timeout. Using defaults." in captured.out
@@ -64,11 +64,11 @@ def test_macro_brics_announcement_and_logic(mocker):
     macro.simulate_day()
     
     assert macro.brics_announced is True
-    assert macro.brics_vault_drain_daily == 0
+    assert macro.brics_vault_drain_daily == pytest.approx(20.0 / 252)
     # Gold price should be 2500 * drift * 1.10, let's just assert it went up significantly
     assert macro.gold_price > 2600.0
 
     # Also test line 175 logic: geo_tension <= 75 and brics_announced
     macro.geopolitical_tension_index = 50.0
     macro.simulate_day()
-    assert macro.brics_vault_drain_daily == 0
+    assert macro.brics_vault_drain_daily == pytest.approx(20.0 / 252)

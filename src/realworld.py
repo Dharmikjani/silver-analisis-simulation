@@ -79,9 +79,9 @@ def _fetch_from_yfinance() -> Dict[str, Any]:
     gc_hist = tickers.tickers["GC=F"].history(period="5d")
     tnx_hist = tickers.tickers["^TNX"].history(period="5d")
     
-    si_price = float(si_hist['Close'].iloc[-1]) if (not si_hist.empty and 'Close' in si_hist) else 67.0
-    gc_price = float(gc_hist['Close'].iloc[-1]) if (not gc_hist.empty and 'Close' in gc_hist) else 4350.0
-    tnx_rate = float(tnx_hist['Close'].iloc[-1]) if (not tnx_hist.empty and 'Close' in tnx_hist) else 4.50
+    si_price = float(si_hist['Close'].iloc[-1]) if (not si_hist.empty and 'Close' in si_hist) else 51.0
+    gc_price = float(gc_hist['Close'].iloc[-1]) if (not gc_hist.empty and 'Close' in gc_hist) else 2740.0
+    tnx_rate = float(tnx_hist['Close'].iloc[-1]) if (not tnx_hist.empty and 'Close' in tnx_hist) else 4.75
     
     return {
         "success": True,

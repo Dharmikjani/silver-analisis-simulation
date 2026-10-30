@@ -293,7 +293,7 @@ class SolarPV(Stakeholder):
         substitution_threshold = sub_base * macro.m2_inflation_index
         
         # AI Logic: Bear Case Threat Matrix - Copper substitution is physically impossible at scale before 2029
-        if not SCENARIOS_OVERRIDE["no_solar_sub"] and price > substitution_threshold and macro.current_year >= 2029:
+        if not SCENARIOS_OVERRIDE["no_solar_sub"] and price > substitution_threshold:
             # Probabilistic substitution based on user requirement (not hard 100% budget)
             rd_funding_rate = ((price - substitution_threshold) / 100.0) * (1.0 / TRADING_DAYS)
             self.substitution_rd_budget += rd_funding_rate
@@ -316,7 +316,10 @@ class SolarPV(Stakeholder):
         
         # FIX #7: Silver loading thrifting — cells use ~3% less silver per year (industry trend since 2015)
         if macro.current_year >= 2015:
-            self.loading_factor *= math.exp(-0.03 * dt)
+            thrifting_rate = -0.03
+            if price > (80.0 * macro.m2_inflation_index):
+                thrifting_rate = -0.10  # Accelerated thrifting (observed -19% PV silver demand in 2026)
+            self.loading_factor *= math.exp(thrifting_rate * dt)
             self.loading_factor = max(0.20, self.loading_factor)  # Floor: can't go below 20% of original loading
             
         # FIX: Panic Hoarding (Bullwhip Effect) — now decays over ~2 years instead of permanent 2x

@@ -40,9 +40,9 @@ class LiveDataOracle:
             if "Copper" in data and data["Copper"] > 0: self.copper = data["Copper"]
             
             # DEF-09 Fix: Guarantee non-zero fallbacks when yfinance returns empty history
-            if self.silver_price <= 0.0: self.silver_price = 67.0
-            if self.gold_price <= 0.0: self.gold_price = 4350.0
-            if self.fed_rate <= 0.0: self.fed_rate = 4.50
+            if self.silver_price <= 0.0: self.silver_price = 51.0
+            if self.gold_price <= 0.0: self.gold_price = 2740.0
+            if self.fed_rate <= 0.0: self.fed_rate = 4.75
             if self.copper <= 0.0: self.copper = 4.0
             
             log_event("LiveDataOracle", "Loaded live data", silver=self.silver_price, gold=self.gold_price, dxy=self.dxy, fed_rate=self.fed_rate, copper=self.copper)
@@ -50,11 +50,11 @@ class LiveDataOracle:
             
         except Exception as e:
             print(f"[LiveDataOracle] API Error: {e}. Using defaults.")
-            self.silver_price = 67.0
-            self.gold_price = 4350.0
+            self.silver_price = 51.0
+            self.gold_price = 2740.0
 
 class MacroEnvironment:
-    def __init__(self, config=None, gold_price=4350.0, fed_rate=5.0, dxy=100.0, copper=4.0, start_year=2026, start_day=0):
+    def __init__(self, config=None, gold_price=2740.0, fed_rate=4.75, dxy=100.0, copper=4.0, start_year=2026, start_day=0):
         self.config = config
         self.dxy_strength = dxy
         self.fed_funds_rate = fed_rate

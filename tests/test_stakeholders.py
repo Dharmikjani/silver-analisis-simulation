@@ -13,27 +13,26 @@ import copy
 class MockMacro:
     def __init__(self):
         self.config = copy.deepcopy(FUTURE_2026_STATE)
-        self.config.start_silver_price = 65.0
         self.m2_inflation_index = 1.0
 
 def test_jpm_dump_logic():
     macro = MockMacro()
-    # Threshold is 65.0 * 3.33 = 216.45
+    # Calibrated 2026 threshold is 51.0 * 2.0 = 102.0 (~$100/oz)
     jpm = JPM_House_Account(vault_float=350.0)
     
     # Below threshold, shouldn't dump
-    jpm.process_day(price=200.0, macro=macro)
+    jpm.process_day(price=90.0, macro=macro)
     assert not jpm.dumping
     assert jpm.vault_float == 350.0
     
     # Above threshold, should dump exactly 5.0
-    jpm.process_day(price=220.0, macro=macro)
+    jpm.process_day(price=110.0, macro=macro)
     assert jpm.dumping
     assert jpm.vault_float == 345.0
     
     # Exhaust vault
     jpm.vault_float = 2.0
-    jpm.process_day(price=220.0, macro=macro)
+    jpm.process_day(price=110.0, macro=macro)
     assert jpm.vault_float >= 0, "Vault float should not drop below 0!"
 
 @given(
@@ -56,7 +55,7 @@ def test_jpm_fuzzing(price, vault, inflation):
 
 def test_retail_melt_logic():
     macro = MockMacro()
-    # Threshold = 65.0 * 2.0 = 130.0
+    # Parabolic FOMO melt threshold: 30.0 * 4.0 = 120.0
     retail = Retail_Mattress_Hoard(vault_float=2000.0)
     
     retail.process_day(price=100.0, macro=macro)

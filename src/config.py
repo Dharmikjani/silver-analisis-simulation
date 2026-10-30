@@ -122,13 +122,28 @@ class SimConfig:
             print(f"[Config] Error loading YAML config: {e}")
             raise
 
-# Shared defaults for the hardcoded magic numbers we pulled out
+# Shared defaults for historical scenarios ($30 baseline)
 DEFAULT_THRESHOLDS = Thresholds(
     retail_melt_multiplier=2.0,       # $60 / $30
     jpm_dump_multiplier=3.33,         # $100 / $30
     solar_substitution_multiplier=6.66, # $200 / $30
     hoarder_dump_multiplier=5.0,      # $150 / $30
     china_stop_buying_multiplier=10.0, # $300 / $30
+    prob_brics_announce=0.05,
+    prob_cbdc_launch=0.05,
+    prob_mining_strike=0.10,
+    prob_retail_capitulation=0.05,
+    prob_energy_crisis=0.05,
+    prob_predatory_squeeze=0.20
+)
+
+# Multipliers calibrated specifically for 2026 ($51.0/oz baseline)
+THRESHOLDS_2026 = Thresholds(
+    retail_melt_multiplier=1.60,        # $81.60 (~$80 / $51)
+    jpm_dump_multiplier=2.00,          # $102.00 (~$100 / $51)
+    solar_substitution_multiplier=2.00, # $102.00 (accelerated thrifting & substitution R&D)
+    hoarder_dump_multiplier=3.00,       # $153.00 (~$150 / $51)
+    china_stop_buying_multiplier=6.00,  # $306.00 (~$300 / $51)
     prob_brics_announce=0.05,
     prob_cbdc_launch=0.05,
     prob_mining_strike=0.10,
@@ -171,8 +186,8 @@ HISTORICAL_1990_STATE = SimConfig(
 )
 
 FUTURE_2026_STATE = SimConfig(
-    start_year=2026, start_silver_price=67.0, start_gold_price=4350.0, comex_float=415.0,
-    fed_rate=5.0, primary_mine=232.0, byproduct_mine=610.0, scrap_refiners=150.0, ewaste=40.0,
-    solar_pv=151.0, ev_auto=100.0, defense=40.0, ai_tech=80.0, jewelry=200.0, other_demand=280.0, retail=250.0,
-    thresholds=DEFAULT_THRESHOLDS, capacities=DEFAULT_CAPACITIES, vaults=DEFAULT_VAULTS
+    start_year=2026, start_silver_price=51.0, start_gold_price=2740.0, comex_float=404.6,
+    fed_rate=4.75, primary_mine=232.0, byproduct_mine=610.0, scrap_refiners=195.0, ewaste=41.4,
+    solar_pv=151.0, ev_auto=100.0, defense=25.0, ai_tech=80.0, jewelry=200.0, other_demand=280.0, retail=235.0,
+    thresholds=THRESHOLDS_2026, capacities=DEFAULT_CAPACITIES, vaults=DEFAULT_VAULTS
 )

@@ -1,5 +1,8 @@
 # Zero Inventory Event: Exchange Default, Force Majeure & Market Decoupling
 
+> [!NOTE]
+> **Scenario Framework**: This report details the structural emergency protocols, legal escape hatches, and market decoupling mechanics modeled as an **asymmetric tail-risk scenario** if deliverable Western physical float reaches critical exhaustion thresholds.
+
 ## Executive Summary
 
 This forensic research report analyzes the systemic chain of events triggered when available (deliverable) silver inventory at major Western exchanges—specifically the **COMEX (New York)** and the **LBMA (London)**—approaches or hits mathematical zero. 

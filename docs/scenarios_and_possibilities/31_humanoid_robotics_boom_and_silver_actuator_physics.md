@@ -1,21 +1,25 @@
 # Module 31: Humanoid Robotics Boom, Actuator Physics & Silver Consumption Trajectory (2026–2035)
 
+> [!NOTE]
+> **Scenario Classification**: This report is classified under **`scenarios_and_possibilities/` (Tier C: Forward-Looking Technological Frontier)**. Near-term demand (2026–2030) reflects pilot factory lines and early commercial deployments, while multi-million fleet projections represent long-term secular possibilities (2032–2035+).
+
 ## Executive Summary
 
-The global explosion of **General-Purpose Humanoid Robotics** (Tesla Optimus, Figure AI/Figure 02, Boston Dynamics Atlas, Unitree, Agility Digit, Sanctuary AI) and **Next-Gen Industrial Embodied AI** represents a brand-new, non-linear industrial demand vector for silver ($\text{Ag}$).
+The emergence of **General-Purpose Humanoid Robotics** (Tesla Optimus, Figure AI/Figure 02, Boston Dynamics Atlas, Unitree, Agility Digit, Sanctuary AI) and **Next-Gen Industrial Embodied AI** represents a promising, non-linear industrial demand vector for silver ($\text{Ag}$).
 
 While early robotics market models focused solely on battery packs and compute chips, a granular engineering audit of **robotic joint actuators, tactile sensory e-skin, high-flex wire harnesses, slip rings, and high-frequency power distribution** reveals that humanoid robots are among the most **silver-dense mechatronic machines ever engineered**.
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                   HUMANOID ROBOTICS & SILVER CONSUMPTION FACT SHEET (2026–2035)                  │
+│                   HUMANOID ROBOTICS & SILVER CONSUMPTION ROADMAP (2026–2035)                     │
 ├──────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ Average Actuators Per Humanoid:   28 to 50+ Degrees of Freedom (DoF)                             │
 │ Silver Intensity Per Unit:        120g to 250g (3.85 to 8.04 Troy Oz) of pure silver / robot     │
-│ Commercial Inflection Window:     2027–2028 (Factory Pilot Lines ──▶ Mass Gigafactory Output)    │
-│ Projected Global Fleet by 2035:   20 Million to 50 Million Humanoids                             │
-│ Annual Silver Demand by 2035:     +77.0 Moz to +192.5 Moz / year (Up to 23% of Global Mining!)   │
-│ Price Elasticity Score:           0.0 (100% Price Inelastic BOM Component)                      │
+│ Near-Term Pilot Phase (2026–2028):10,000 to 50,000 units/yr (0.05 Moz to 0.40 Moz / year)       │
+│ Industrial Scaling (2029–2031):   250,000 to 1,000,000 units/yr (1.5 Moz to 8.0 Moz / year)      │
+│ Long-Range Frontier (2035 F):     15M to 30M Cumulative Fleet (+45 Moz to +115 Moz / year)       │
+│ Bill of Materials (BOM) Impact:   Silver represents <0.5% of total robot manufacturing cost      │
+│                                   (High price insensitivity up to $150/oz; thrifting above $200) │
 └──────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 

@@ -40,11 +40,13 @@ Analysis of the **CFTC Disaggregated Commitment of Traders (COT)** report reveal
 ```
 
 ### Key Analytical Findings:
-1. **The 2x Naked Exposure**: Bullion banks and commercial hedgers are currently **short 202.27 Million Ounces** of silver on COMEX, while COMEX vaults hold only **99.70 Million Ounces of Registered deliverable silver**.
+1. **The Commercial Short vs. Registered Coverage**: Commercial market participants (Swap Dealers and Producer Hedgers) hold net short commitments of **~200 Million Ounces** on COMEX, against **~104.6 Million Ounces of immediately deliverable Registered silver warrants** (a coverage ratio of ~1.9x).
+   - *Producer/Merchant Shorts*: Represent forward mine production hedging (hedging future ore extraction).
+   - *Swap Dealer Shorts*: Represent intermediary hedging against OTC swaps, investment notes, and retail products.
 2. **Top 4 & Top 8 Concentration Ratios**:
    * The **Top 4 largest traders** hold **35% to 42%** of the entire net short open interest.
    * The **Top 8 largest traders** hold **50% to 60%** of the total net short open interest.
-3. **The Squeeze Vulnerability**: If institutional long holders demand physical delivery for just **50% of their contracts**, the deliverable inventory is wiped out immediately, forcing banks into a catastrophic buy-back scramble.
+3. **Delivery Leverage & The Warranting Buffer**: Historically, over 95% of COMEX futures are financially settled or rolled forward. However, if standing long contracts demand physical delivery in excess of Registered warrants, holders of "Eligible" metal (~231.2 Moz) are incentivized by delivery premiums to warrant and release metal, preventing an immediate delivery failure unless sustained physical withdrawals deplete the broader pool.
 
 ---
 
@@ -53,20 +55,20 @@ Analysis of the **CFTC Disaggregated Commitment of Traders (COT)** report reveal
 A critical distinction must be maintained between **total metal stored** and **true unencumbered liquid free-float**:
 
 ```
-[Total London LBMA Vaults: 902.8 Moz]
+[Total London LBMA Vaults: ~860.0 Moz]
          │
-         ├── [-600.0 Moz] Encumbered by ETFs (SLV, PSLV, Zurich Custodians)
+         ├── [-560.0 Moz] Encumbered by ETFs (SLV, PSLV, Zurich Custodians)
          │
-         └── [= 302.8 Moz] LBMA True Liquid Free Float
+         └── [= ~300.0 Moz] LBMA Unencumbered Float Buffer
                                   +
-[COMEX Total Vaults: 332.8 Moz]
+[COMEX Total Vaults: 335.8 Moz (Oct 2026)]
          │
-         ├── [-233.1 Moz] "Eligible" (Private Wealth Storage - Not For Sale)
+         ├── [-231.2 Moz] "Eligible" (Private Custody Metal - Warrant-Convertible)
          │
-         └── [=  99.7 Moz] COMEX "Registered" Deliverable Metal
+         └── [= 104.6 Moz] COMEX "Registered" Deliverable Warrants
                                   ║
                                   ▼
-         [TOTAL GLOBAL LIQUID FREE FLOAT = 402.5 Moz]
+         [TOTAL ESTIMATED WESTERN LIQUID FLOAT BUFFER ≈ 404.6 Moz]
 ```
 
 ### The Depletion Countdown Matrix:

@@ -28,15 +28,15 @@ This report establishes the complete spectrum of 5 structural GSR scenarios, mod
 │ 1980 Hunt Brothers Squeeze Peak          │ **~17:1**    │ Intraday market low (Jan 18, 1980) — actual trading low per LBMA fix records. Note: "15:1" is the historic 1792 bimetallic standard, not the 1980 market low. │
 │ Earth's Crustal Geological Abundance     │ **17–19 : 1**│ Natural occurrence in continental rock │
 │ Annual Mining Extraction Ratio (2026)    │ **7.3 : 1**  │ 842 Moz Silver vs. 115.7 Moz Gold      │
-│ Total Investable Above-Ground Bullion    │ **0.35 : 1** │ 2.5B oz Silver vs. 7.07B oz Gold       │
-│ Liquid Exchange Free Float (2026)        │ **1.3 : 1**  │ 415 Moz Silver vs. 320 Moz Gold        │
+│ Total Investable Bullion (Bars & Coins)  │ **~1.4 : 1** │ ~2.5B oz Silver vs. ~1.8B oz Gold (WGC: Total mined gold is ~7.0B oz, but ~45% is jewelry & ~17% central banks; private investable bullion is ~1.8B oz) │
+│ Liquid Exchange Free Float (2026)        │ **1.3 : 1**  │ 404.6 Moz Silver vs. 310 Moz Gold      │
 └──────────────────────────────────────────┴──────────────┴────────────────────────────────────────┘
 ```
 
 ### The Key Takeaway:
 * **Historically**, the ratio anchored between **10:1 and 16:1** for 90% of civilized history.
-* **Geologically & Physically**, silver is currently mined at **7.3:1** and exists in deliverable vaults at **1.3:1**.
-* **Above Ground**, there is actually **2.8x MORE investable gold bullion than silver bullion** because humanity has consumed and discarded silver in industrial landfills.
+* **Geologically & Physically**, silver is currently mined at **7.3:1** and exists in deliverable vaults at roughly **1.3:1**.
+* **Above Ground**, investable private silver bullion (~2.5B oz) is close to physical volume parity with private gold bullion (~1.8B oz), but in **Dollar Value terms**, total above-ground investable silver (~$125 Billion at $50/oz) is only **~2.5% of total investable gold (~$5 Trillion)**, highlighting massive dollar-weight asymmetry.
 
 ---
 
@@ -45,7 +45,7 @@ This report establishes the complete spectrum of 5 structural GSR scenarios, mod
 ```
                                   GSR COMPRESSION SPECTRUM
                                   
- [Today: 68.9:1] ────► [Scenario 1: 35:1] ────► [Scenario 2: 15:1] ────► [Scenario 3: 8:1] ────► [Scenario 4: 3:1] ────► [Scenario 5: 1:1]
+ [Today: ~65–70:1] ───► [Scenario 1: 35:1] ────► [Scenario 2: 15:1] ────► [Scenario 3: 8:1] ────► [Scenario 4: 3:1] ────► [Scenario 5: 1:1]
   (Paper Leverage)      (Base Structural)       (Bimetallic Peg)        (Mine Extraction)       (Above-Ground Inv.)      (Parity Spike Apex)
 ```
 
@@ -55,8 +55,8 @@ This report establishes the complete spectrum of 5 structural GSR scenarios, mod
 * **Probability**: **70% (Baseline Case)**
 * **Mechanism**: 
   - Cumulative 6-year deficit (>762 Moz) continues to grind down exchange inventory.
-  - Solar PV paste thrifting slows as cells hit physical conductivity limits (~40mg/cell).
-  - High-tech AI, EV, and defense industrial demand creates an unbreakable $75–$100 price floor.
+  - Solar PV paste thrifting reaches engineering conductivity limits (~6–7 mg/Wp).
+  - High-tech AI, EV, and defense industrial demand establishes solid physical price support.
   - Paper leverage gradually contracts under Basel III NSFR unallocated holding costs.
 * **Implied Silver Price**:
   - At $4,000 Gold $\rightarrow$ **$100.00 – $133.33 / oz**

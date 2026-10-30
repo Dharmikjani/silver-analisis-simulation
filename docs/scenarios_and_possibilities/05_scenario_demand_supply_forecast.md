@@ -65,9 +65,9 @@ To evaluate silver's market trajectory over the next decade, we construct **four
 | 10-YEAR MARKET BALANCE FORECAST MATRIX (in Moz)                                   |
 | Year | Mine Output | Scrap Supply | Total Demand (Base) | Base Deficit | Bull Deficit |
 |------|-------------|--------------|---------------------|--------------|--------------|
-| 2025 | 842 Moz     | 189 Moz      | 1,236 Moz           | -40.3 Moz    | -95 Moz      |
-| 2026 | 845 Moz     | 193 Moz      | 1,284 Moz           | -46.3 Moz    | -130 Moz     |
-| 2027 | 848 Moz     | 197 Moz      | 1,325 Moz           | -80.0 Moz    | -165 Moz     |
+| 2025 | 838.0 Moz   | 193.0 Moz    | 1,071.3 Moz         | -40.3 Moz    | -95.0 Moz    |
+| 2026 | 830.0 Moz   | 236.4 Moz    | 1,112.6 Moz         | -46.3 Moz    | -115.0 Moz   |
+| 2027 | 835.0 Moz   | 237.0 Moz    | 1,155.0 Moz         | -83.0 Moz    | -145.0 Moz   |
 | 2028 | 852 Moz     | 201 Moz      | 1,368 Moz           | -115.0 Moz   | -195 Moz     |
 | 2029 | 856 Moz     | 205 Moz      | 1,410 Moz           | -149.0 Moz   | -215 Moz     |
 | 2030 | 860 Moz     | 210 Moz      | 1,455 Moz           | -185.0 Moz   | -245 Moz     |

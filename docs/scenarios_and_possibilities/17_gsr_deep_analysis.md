@@ -145,22 +145,23 @@ To understand the fundamental distortion in the Gold:Silver Ratio, we must exami
 │ Tier / Dimension                 │ Gold Metric     │ Silver Metric   │ Real Ratio│ Market Price │
 │                                  │                 │                 │ (Ag : Au) │ Ratio (GSR)  │
 ├──────────────────────────────────┼─────────────────┼─────────────────┼───────────┼──────────────┤
-│ 1. Crustal Geological Abundance  │ Rare Baseline   │ 17–19x in Crust │  19.0 : 1 │   ~68.9 : 1  │
-│ 2. Annual Mine Supply (Extraction│ 115.7 Moz/year  │ 842.0 Moz/year  │   7.3 : 1 │   ~68.9 : 1  │
-│ 3. Investable Above-Ground Stock │ 7,070 Moz (WGC) │ 2,500 Moz (CPM) │  0.35 : 1 │   ~68.9 : 1  │
-│ 4. Exchange Liquid Free Float    │ ~320 Moz        │ ~415 Moz        │   1.3 : 1 │   ~68.9 : 1  │
+│ 1. Crustal Geological Abundance  │ Rare Baseline   │ 17–19x in Crust │  19.0 : 1 │   ~65–70 : 1 │
+│ 2. Annual Mine Supply (Extraction│ 115.7 Moz/year  │ 842.0 Moz/year  │   7.3 : 1 │   ~65–70 : 1 │
+│ 3. Investable Bullion (Bars/Coins│ ~1,800 Moz (WGC)│ 2,500 Moz (CPM) │   1.4 : 1 │   ~65–70 : 1 │
+│    *(Note: Total gold mined in history is 7,070 Moz, but ~45% is jewelry & 17% sovereign)*│
+│ 4. Exchange Liquid Free Float    │ ~310 Moz        │ ~404.6 Moz      │   1.3 : 1 │   ~65–70 : 1 │
 ├──────────────────────────────────┴─────────────────┴─────────────────┴───────────┴──────────────┤
-│ Liquid Vault Market Cap Value:   Gold = $1.30 Trillion  vs.  Silver = $0.026 Trillion ($26B)     │
-│ (The Liquid Gold pool is 50x LARGER in dollar terms than the entire Liquid Silver Free Float!)   │
+│ Liquid Vault Market Cap Value:   Gold = $1.30 Trillion  vs.  Silver = $0.021 Trillion ($21B)     │
+│ (The Liquid Gold pool is >60x LARGER in dollar terms than the entire Liquid Silver Free Float!)   │
 └─────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ### The 3 Core Ratio Insights:
 1. **The Annual Mine Supply Ratio (7.3 : 1)**: For every 1 ounce of gold extracted globally, only ~7.3 to 8 ounces of silver are mined.
-2. **The Above-Ground Inversion (0.35 : 1)**: While almost all gold ever mined (7.07B oz) remains preserved in vaults, jewelry, and sovereign reserves, over 60% of all historical silver has been consumed and discarded unrecovered in industrial applications (electronics, solar, medical). There is actually **2.8x MORE investable gold bullion above ground than silver bullion**.
-3. **The Liquid Exchange Float Parity (1.3 : 1)**: In the major delivery vaults (LBMA, COMEX, SGE), the unencumbered physical float available for immediate delivery is nearly **1:1** in physical ounce terms (320 Moz Gold vs. 415 Moz Silver).
+2. **Investable Bullion Parity (1.4 : 1)**: While humanity preserves nearly all gold ever mined (~7.07B oz) in jewelry and central banks, over 60% of all historical silver has been consumed and discarded unrecovered in industrial landfills. Total private investable bullion (bars and coins) is roughly **2,500 Moz Silver vs. 1,800 Moz Gold**. In physical volume they are close to parity, but in **dollar market capitalization, investable gold is ~40x larger than investable silver**, highlighting immense dollar-weight asymmetry.
+3. **The Liquid Exchange Float Parity (1.3 : 1)**: In the major delivery vaults (LBMA, COMEX, SGE), the unencumbered physical float available for immediate delivery is nearly **1.3:1** in physical ounce terms (310 Moz Gold vs. ~405 Moz Silver).
 
-> **Key Takeaway**: Pricing silver at a **68.9:1 ratio** when it is mined at **7.3:1**, held in investable form at **0.35:1**, and liquid in vaults at **1.3:1** represents one of the most severe physical-to-pricing dislocations in modern financial history.
+> **Key Takeaway**: Pricing silver at a **65:1 to 70:1 ratio** when it is mined at **7.3:1**, held in investable bullion at **1.4:1**, and liquid in vaults at **1.3:1** represents one of the most severe physical-to-pricing dislocations in modern financial history.
 
 ---
 

@@ -31,11 +31,12 @@ Samsung SDI's proprietary sulfide-based solid-state battery represents the most 
 └──────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Mathematical Market Impact on Silver Deficit:
-$$\text{If 2.0 Million Premium EVs adopt Ag-C Solid-State by 2030:}$$
-$$\mathbf{2,000,000\text{ vehicles} \times 28.0\text{ oz/pack} = \mathbf{56.0\text{ Million Ounces / year of NEW Demand}}}$$
+### Commercial Adoption Curve & Market Impact:
+* **Initial 2027–2028 Rollout**: Early commercial deployment will focus on limited high-performance and luxury models (50,000 to 150,000 units/year), consuming **~1.5 to 4.5 Moz/year** of high-purity silver.
+* **2030–2032 Expansion Target**: If battery gigafactories scale to supply ~1.5 to 2.0 million premium EVs annually:
+$$\mathbf{1,800,000\text{ vehicles} \times 28.0\text{ oz/pack} = \mathbf{\sim 50.4\text{ Million Ounces / year of Incremental Demand}}}$$
 
-* **Price Elasticity**: In a $100,000+ luxury electric vehicle (Mercedes EQS, Porsche Taycan, Lucid), $1,000 to $2,000 of silver represents only **1% to 2% of the vehicle BOM (Bill of Materials)**, making automakers **100% price-inelastic buyers**.
+* **Price Elasticity & BOM Impact**: In a $100,000+ luxury electric vehicle (Mercedes, Porsche, Lucid), $1,000 to $1,500 of silver accounts for roughly **1.0% to 1.5% of total vehicle manufacturing cost**. While luxury automakers exhibit high price tolerance, mass-market adoption beyond 2030 will spur R&D into silver-carbon thrifting if silver spot trades above $100/oz.
 
 ---
 

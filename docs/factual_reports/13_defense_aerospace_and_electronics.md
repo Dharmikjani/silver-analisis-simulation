@@ -15,15 +15,15 @@ Military precision-guided munitions (PGMs) require instantaneous, fail-safe elec
 |------------------------------|-----------------------------|-------------------------|-----------------------------------------|
 | **Air Defense (Patriot/SM-6)**| Molten-Salt Ag-Zn           | 150g - 450g per missile | High power density, <50ms activation    |
 | **Air-to-Air (AMRAAM/Sidewinder)**| Ag-Cl Thermal Battery   | 80g - 180g per missile  | 20-year shelf life, extreme G-force resistance|
-| **Cruise Missiles (Tomahawk)**| High-Cap Ag-Zn Primary      | 500g - 1,200g per unit  | Sustained multi-hour high discharge     |
-| **Heavy Torpedoes (MK-48)**  | Seawater-Activated Ag-Cl    | 2,500g - 5,000g per unit| Extreme energy density in marine water  |
+| **Cruise Missiles (Tomahawk)**| High-Cap Ag-Zn Primary      | 300g - 600g pure Ag (10–20 oz)| Sustained multi-hour high discharge     |
+| **Heavy Torpedoes (MK-48)**  | Seawater-Activated Ag-Cl    | 1,500g - 3,000g per unit| Extreme energy density in marine water  |
 +-----------------------------------------------------------------------------------------------------------------------+
 ```
 
 ### Key Technical Attributes:
 - **Zero Self-Discharge & 20-Year Shelf Life**: Thermal batteries use a solid inorganic salt electrolyte that remains completely inert until activated by a pyrotechnic heater charge upon missile launch.
 - **Unmatched Power Density**: Silver's electrical conductivity ($63.0\text{ MS/m}$) provides maximum current output within a compact volume.
-- **Total Price Inelasticity (Elasticity Score = 0.0)**: In a $1.5 million Patriot missile, the raw silver cost ($150) represents **0.01% of the weapon system cost**. Procurement is 100% price inelastic.
+- **Near-Total Price Inelasticity ($\epsilon \approx -0.02$)**: In a $1.5 million Patriot missile or $2.0 million Tomahawk, the raw silver cost ($200–$500) represents **<0.03% of the total weapon system cost**. Because military specifications (Mil-Spec) require extensive re-certification (taking 3–5 years) to alter battery chemistries, defense procurement remains virtually price-insensitive up to $200+/oz.
 
 ---
 
@@ -76,7 +76,7 @@ The rapid expansion of Low Earth Orbit (LEO) satellite mega-constellations (Spac
 | **Satellite Solar Arrays (LEO)** | 4.2 Moz           | 5.8 Moz           | 7.5 Moz           | **0.0 (Inelastic)**    |
 | **Mil Radar & RF Waveguides**    | 2.8 Moz           | 3.2 Moz           | 3.8 Moz           | **0.0 (Inelastic)**    |
 | **Defense Optical & Laser Tech** | 1.5 Moz           | 1.8 Moz           | 2.2 Moz           | **0.0 (Inelastic)**    |
-| **Total Defense & Aerospace Ag**  | **11.7 Moz**      | **14.6 Moz**      | **18.0 Moz**      | **100% Inelastic**    |
+| **Total Defense & Aerospace Ag**  | **11.7 Moz**      | **14.6 Moz**      | **18.0 Moz**      | **High Inelasticity** |
 +-----------------------------------------------------------------------------------------------------------------------+
 ```
 
@@ -86,7 +86,7 @@ The rapid expansion of Low Earth Orbit (LEO) satellite mega-constellations (Spac
 
 Per the **Dynamic Price Impact Rule & Master Governance Protocol**, we evaluate whether Module G findings alter our baseline forecasts:
 
-1. **Inelasticity Confirmation**: Defense and aerospace silver demand (**18.0 Moz in 2026**, growing to **28.5 Moz by 2030**) is **100% price inelastic**. Defense contractors buy silver regardless of spot price ($58/oz or $150+/oz), guaranteeing an unshakable non-substitutable demand baseline.
+1. **Inelasticity Confirmation**: Defense and aerospace silver demand (**18.0 Moz in 2026**, growing to **28.5 Moz by 2030**) exhibits **exceptional price insensitivity** due to strict Mil-Spec qualification barriers. While civilian solar PV sectors engage in thrifting at $80+/oz, defense contractors absorb silver at prevailing prices, guaranteeing an inelastic baseline.
 2. **Growth Velocity**: LEO satellite deployment surge (+15.0 Moz/yr by 2030) adds +10.8 Moz/yr of new non-discretionary industrial demand.
 
 ### 📌 Explicit Protocol Delta Audit Result:

@@ -8,26 +8,31 @@ This forensic institutional report provides a **month-by-month mathematical simu
 
 ---
 
-## 1. Baseline Vault Inventory & Net Monthly Drain Rate (August 2026)
+## 1. Baseline Vault Inventory & Dynamic Warranting Buffer (October 2026)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────────────┐
-│                   WESTERN DELIVERABLE INVENTORY BALANCE SHEET                            │
+│                   WESTERN DELIVERABLE INVENTORY BALANCE SHEET (OCT 2026)                 │
 ├──────────────────────────────────────────────────────────────────────────────────────────┤
-│ 📦 COMEX Registered (Warranted Deliverable Metal):                            99.7 Moz   │
-│ 🔒 COMEX Eligible (Private Customer Metal - Non-Warranted):                  ~200.0 Moz   │
-│ 🌊 LBMA Liquid Unallocated Float (Excluding 500 Moz ETF Lockup):             ~202.8 Moz   │
+│ 📦 COMEX Registered (Warranted Deliverable Metal):                           104.6 Moz   │
+│ 🔒 COMEX Eligible (Private Customer Metal - Warrant-Convertible Buffer):     231.2 Moz   │
 │ ──────────────────────────────────────────────────────────────────────────────────────── │
-│ 🛡️ TOTAL AUDITED WESTERN LIQUID FREE FLOAT:                                  = 402.5 Moz  │
-│ 🚨 COMEX CRITICAL OPERATING BUFFER (Immediate Delivery Risk):                  99.7 Moz   │
+│ 🏦 TOTAL COMEX VAULTED INVENTORY:                                            335.8 Moz   │
+│ 🌊 LBMA Liquid Unallocated Float (Excluding ETF / Institutional Lockup):     ~200.0 Moz   │
+│ ──────────────────────────────────────────────────────────────────────────────────────── │
+│ 🛡️ TOTAL AUDITED WESTERN LIQUID FREE FLOAT:                                  ~404.6 Moz  │
+│ 🚨 COMEX IMMEDIATE DELIVERABLE BUFFER (Registered):                          104.6 Moz   │
 └──────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
+> [!NOTE]
+> **The Dynamic Warranting Elasticity Factor**: A naive linear drain model assumes Registered metal only flows out. In reality, as delivery premiums and lease rates rise, private owners of "Eligible" silver can warrant their metal into "Registered" status within 24 to 48 hours. This dynamic buffer provided +4.9 Moz of net warrant additions between August and October 2026, stabilizing immediate delivery stocks at ~104.6 Moz despite ongoing global deficits.
+
 ### Global Supply vs. Demand Monthly Drain Physics:
-* **Annual Global Supply**: ~1,038.0 Moz (~838.0 Moz Mining + ~200.0 Moz Scrap).
-* **Baseline Annual Demand**: ~1,084.3 Moz to ~1,188.0 Moz (Industrial + Solar + Investment).
-* **Net Structural Deficit Range**: **-46.3 Moz/year** (Low) to **-150.0 Moz/year** (High Squeeze).
-* **Net Monthly Drain Rate**: **-3.86 Moz/month** (Baseline) up to **-12.50 Moz/month** (Crisis Velocity).
+* **Annual Global Supply**: ~1,066.4 Moz (~830 Moz Mining + ~236 Moz Scrap).
+* **Baseline Annual Demand**: ~1,112.6 Moz (Industrial + Solar + Investment).
+* **Net Structural Deficit**: **-46.3 Moz/year** (World Silver Survey 2026 baseline).
+* **Net Monthly Drain Rate**: **-3.86 Moz/month** (Baseline) up to **-8.50 Moz/month** (Squeeze Velocity).
 
 ---
 
@@ -38,31 +43,30 @@ This forensic institutional report provides a **month-by-month mathematical simu
 │ THREE MATHEMATICAL RUNOUT VELOCITY SCENARIOS                                                                          │
 │ Scenario Name            │ Annual Deficit │ Monthly Drain │ Primary Drivers & Assumptions                             │
 │--------------------------|----------------|---------------|-----------------------------------------------------------│
-│ **Scenario A: Base Case**│ **-46.3 Moz**  │ **-3.86 Moz** │ Moderate solar growth (TOPCon), flat Indian retail import.│
-│ **Scenario B: High Squeeze**│ **-95.0 Moz**│ **-7.92 Moz** │ Solar paste surge (+290 Moz), India IIBX re-stocking.     │
-│ **Scenario C: Panic Run**│ **-150.0 Moz** │ **-12.50 Moz**│ Sovereign reserves (Gosfond/BRICS), US DPA scrap hoarding.│
+│ **Scenario A: Base Case**│ **-46.3 Moz**  │ **-3.86 Moz** │ Thrifting stabilizes PV demand; steady Asian physical bids│
+│ **Scenario B: High Squeeze**│ **-85.0 Moz**│ **-7.08 Moz** │ Solar paste floor reached (~6.5mg/W); India IIBX restocking│
+│ **Scenario C: Panic Run**│ **-135.0 Moz** │ **-11.25 Moz**│ Sovereign reserves + institutional flight to bullion.     │
 +-----------------------------------------------------------------------------------------------------------------------+
 ```
 
 ---
 
-## 3. Month-by-Month Vault Exhaustion Countdown (2026–2029)
+## 3. Dynamic Month-by-Month Inventory Runout Simulation (2026–2029)
 
-The table below tracks the mathematical depletion of **COMEX Registered Deliverable Stocks** (starting at 99.7 Moz) and the total **Western Liquid Free Float** (starting at 402.5 Moz):
+The table below tracks the dynamic trajectory of **COMEX Registered Deliverable Stocks** (re-anchored at 104.6 Moz in Oct 2026) and total **Western Liquid Free Float**:
 
 ```
 +-----------------------------------------------------------------------------------------------------------------------+
-│ MONTH-BY-MONTH INVENTORY RUNOUT SIMULATION (August 2026 – December 2028)                                              │
+│ DYNAMIC VAULT RUNOUT SIMULATION (October 2026 – December 2028)                                                        │
 │ Date / Month     │ COMEX Reg. (Base) │ COMEX Reg. (Squeeze) │ Total Float (Squeeze) │ Lease Rate  │ Spot Price Band   │
 │------------------|-------------------|----------------------|-----------------------|-------------|-------------------│
-│ **Aug 2026 (Now)**│ **99.7 Moz**      │ **99.7 Moz**         │ **402.5 Moz**         │ **6.2%**    │ **$58 – $62 / oz**│
-│ **Nov 2026**     │ 88.1 Moz          │ 75.9 Moz             │ 378.7 Moz             │ 7.8%        │ $65 – $72 / oz    │
-│ **Feb 2027**     │ 76.5 Moz          │ 52.1 Moz             │ 354.9 Moz             │ 11.5%       │ $78 – $88 / oz    │
-│ **May 2027**     │ 64.9 Moz          │ 🚨 **28.3 Moz**      │ 331.1 Moz             │ 18.2%       │ $95 – $110 / oz   │
-│ **Aug 2027**     │ 53.3 Moz          │ ⚠️ **4.5 Moz**       │ 307.3 Moz             │ 32.0%       │ $125 – $150 / oz  │
-│ **Nov 2027**     │ 🚨 **41.7 Moz**   │ 💥 **0.0 Moz (ZERO)**│ 283.5 Moz             │ **>45.0%**  │ **$180 – $220 /oz**│
-│ **May 2028**     │ ⚠️ **18.5 Moz**   │ 0.0 Moz (Settled)    │ 235.9 Moz             │ Emergency   │ $220 – $280 / oz  │
-│ **Dec 2028**     │ 💥 **0.0 Moz**    │ 0.0 Moz (Dual-Price) │ 188.3 Moz             │ Broken      │ **$300+ Physical**│
+│ **Oct 2026 (Live)**│ **104.6 Moz**   │ **104.6 Moz**        │ **404.6 Moz**         │ **3.8%**    │ **$50 – $52 / oz**│
+│ **Apr 2027**     │ 98.5 Moz          │ 89.2 Moz             │ 362.1 Moz             │ 5.5%        │ $58 – $66 / oz    │
+│ **Oct 2027**     │ 92.4 Moz          │ 71.8 Moz             │ 319.6 Moz             │ 8.2%        │ $68 – $78 / oz    │
+│ **Apr 2028**     │ 86.3 Moz          │ 🚨 **48.5 Moz**      │ 277.1 Moz             │ 14.0%       │ $82 – $95 / oz    │
+│ **Oct 2028**     │ 80.2 Moz          │ ⚠️ **22.0 Moz**      │ 234.6 Moz             │ **28.0%**   │ **$105 – $135 /oz**│
+│ **Apr 2029**     │ 74.1 Moz          │ 💥 **<10 Moz (CRUNCH)** 192.1 Moz            │ Emergency   │ $145 – $185 / oz  │
+│ **Dec 2029**     │ 65.0 Moz          │ Warrant Gridlock     │ 145.0 Moz             │ Broken      │ Physical Decoupling│
 +-----------------------------------------------------------------------------------------------------------------------+
 ```
 
@@ -76,23 +80,24 @@ When deliverable stocks drop below specific psychological and mechanical floors,
 ┌──────────────────────────────────────────────────────────────────────────────────────────┐
 │                   THE 3 COMEX VAULT EMERGENCY CRISIS THRESHOLDS                          │
 ├──────────────────────────────────────────────────────────────────────────────────────────┤
-│ 🚨 THRESHOLD 1: THE 50 Moz "RED ALERT" (Expected: Q1–Q3 2027):                            │
+│ 🚨 THRESHOLD 1: THE 50 Moz "RED ALERT" (Conditional Horizon: 2028 in High Squeeze):      │
 │    • COMEX Registered drops below 50 Moz (~10,000 contracts).                            │
 │    • Commercial shorts face delivery coverage ratio of >5:1 Open Interest to Metal.      │
-│    • Lease rates surge past 15%, triggering emergency transatlantic airlifts from London.│
+│    • Lease rates surge past 12%–15%, triggering emergency transatlantic bullion shipments│
 │                                                                                          │
-│ ⚠️ THRESHOLD 2: THE 25 Moz "TERMINAL SCRAMBLE" (Expected: Q2–Q4 2027):                    │
+│ ⚠️ THRESHOLD 2: THE 25 Moz "TERMINAL SCRAMBLE" (Conditional Horizon: 2028–2029):         │
 │    • Registered metal drops to less than 5,000 contracts.                                │
-│    • CME Group institutes "Liquidation-Only Trading" (Silver Rule 7 parallel) and raises │
-│      margin requirements to 25%–35% to force speculative longs to close.                 │
+│    • CME Group institutes "Liquidation-Only Trading" (Silver Rule 7 precedent) and raises│
+│      margin requirements to 25%–35% to force leveraged positions to liquidate.           │
 │                                                                                          │
-│ 💥 THRESHOLD 3: THE 0 Moz "FORCE MAJEURE & CASH SETTLEMENT" (Expected: Late 2027–2028):   │
-│    • Vault deliverable warrants hit absolute zero.                                       │
-│    • CME Group invokes **Chapter 7 Emergency Authority**: Contracts are forcibly closed  │
-│      in USD cash at the last official settlement price.                                  │
-│    • **The Great Decoupling**: Physical silver in the real world trades at $250–$350/oz   │
-│      while paper futures freeze in cash settlement disputes!                             │
+│ 💥 THRESHOLD 3: "FORCE MAJEURE & CASH SETTLEMENT RISK" (Tail Risk Horizon: 2029+):       │
+│    • Vault deliverable warrants fall below mandatory daily clearing obligations.         │
+│    • CME Group invokes **Rule 701 Emergency Authority**: Contracts may be financially    │
+│      settled in cash based on exchange-dictated settlement formulas.                     │
+│    • **Physical Premium Decoupling**: Physical silver in the real world trades at a      │
+│      wide 25%–40% premium above cash-settled paper benchmarks.                           │
 └──────────────────────────────────────────────────────────────────────────────────────────┘
+```
 ```
 
 ---

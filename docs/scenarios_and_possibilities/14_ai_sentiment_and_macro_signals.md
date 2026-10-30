@@ -75,13 +75,16 @@ We construct a composite quantitative **Physical Short Squeeze Probability Index
 
 ---
 
-## 4. AI Algorithmic Media & Institutional Sentiment Scoring
+## 4. AI Algorithmic Media & Institutional Sentiment Scoring (Post-Correction Audit)
 
 Machine learning algorithms parse global financial news, CFTC positioning reports, and industrial procurement surveys to produce an **Algorithmic Sentiment Score (-1.00 to +1.00)**:
 
-- **Institutional Sentiment Score**: **+0.82 (Extremely Bullish)**
-- **Primary Sentiment Driver**: Recognition of 6 consecutive years of structural deficits and rapid solar TOPCon paste growth.
-- **CTA Algorithmic Momentum**: Trend-following quantitative CTA funds are maintaining max long leverage above the $50.00/oz technical breakout level.
+- **Institutional Sentiment Score**: **+0.35 (Cautious Bullish / Cyclical Re-Accumulation)**
+- **Primary Sentiment Driver**: Persistent recognition of 6 consecutive years of structural deficits (-46.3 Moz in 2026), counterbalanced by short-term macro headwinds (elevated US yields and DXY).
+- **CFTC COT Positioning (October 2026 Audit)**:
+  * **Managed Money Net Position**: **+3,505 contracts** (down -2,114 on the week; hovering near the bottom of its 52-week range).
+  * **Open Interest**: **113,992 contracts**.
+  * **Contrarian Interpretation**: Quantitative CTA trend-followers have almost completely liquidated excessive leverage accumulated during the parabolic January squeeze. This "washed-out" positioning indicates speculative exhaustion on the sell side, providing fertile ground for a structural rebound once macro headwinds subside.
 
 ---
 
